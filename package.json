@@ -23,7 +23,7 @@
     "jwt-decode": "^3.1.2",
     "loglevel": "^1.8.0",
     "nuxt": "^2.15.8",
-    "sass": "^1.49.9",
+    "sass": "^1.52.0",
     "sass-loader": "^10.2.1",
     "sync-fetch": "^0.3.1",
     "vee-validate": "^3",
