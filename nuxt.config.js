@@ -1,5 +1,6 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  ssr: true,
   head: {
     title: 'mezinamiridici-ssr',
     htmlAttrs: {
@@ -33,13 +34,21 @@ export default {
     prefetchLinks: false
   },
 
+  
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
+
+  axios: {
+    baseURL: process.env.VUE_APP_API_ENDPOINT || "https://www.mezinamiridici.cz/api/v1",
+  },
+
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
+   // '@nuxtjs/eslint-module',
+   '@nuxtjs/tailwindcss',
+   "@nuxtjs/svg"
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -48,7 +57,9 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/i18n',
     'bootstrap-vue/nuxt',
+    '@nuxtjs/dotenv'
   ],
+
 
   server: {
     port: 8080
@@ -63,8 +74,8 @@ export default {
       { code: 'en', iso: 'en', file: 'en.json' },
       { code: 'cs', iso: 'cs', file: 'cs.json' },
     ],
-    defaultLocale: 'cs',
-    fallbackLocale: 'cs',
+    defaultLocale: 'en',
+    fallbackLocale: 'en',
     langDir: '~/locales/',
     strategy: 'no_prefix',
   },
