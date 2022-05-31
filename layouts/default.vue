@@ -1,128 +1,22 @@
 <template>
   <div>
-    <header>
-      <b-navbar toggleable="sm" type="dark" variant="dark">
-        <b-nav-item class="brand-pic" href="/">
-          <nuxt-img
-            :alt="$t('app.logo-alt')"
-            class="d-inline-block align-top brand"
-            src="/images/icons/logo.png"
-          />
-        </b-nav-item>
-
-        <b-navbar-nav class="d-none d-sm-block d-sm-dark">
-          <div class="d-inline-flex flex-column title-tag">
-            <h2><NuxtLink to="/" class="text-white">{{ $t('app.name') }}</NuxtLink></h2>
-            <span class="text-white">{{ $t('app.slogan') }}</span>
-          </div>
-        </b-navbar-nav>
-
-        <b-navbar-nav class="ml-auto align-items-center rightmenu info">
-          <b-nav-item v-if="!authorized">
-            <NuxtLink to="/prihlaseni">
-              {{ $t('app.sign-in-up') }}
-            </NuxtLink>
-          </b-nav-item>
-
-          <b-nav-item
-            v-if="authorized"
-            v-b-tooltip.hover
-            :to="`/p/${userId}/b/novy`"
-            :title="$t('app.new-post')"
-            class="edit"
-            right
-            toggle-class="text-warning "
-          >
-            <BIconPencilSquare scale="2" />
-          </b-nav-item>
-
-          <b-nav-item-dropdown
-            v-if="authorized"
-            class="sign-out"
-            right
-            toggle-class="text-warning "
-          >
-            <template #button-content>
-              <BIconPersonCircle scale="2" />
-            </template>
-
-            <b-dropdown-item
-              :to="`/p/${userId}`"
-              class="dropdown-item p-0"
-            >
-              {{ $t('app.my-profile') }}
-            </b-dropdown-item>
-
-            <b-dropdown-item
-              :to="`/p/${userId}/uprava`"
-              class="dropdown-item p-0"
-            >
-              {{ $t('app.update-profile') }}
-            </b-dropdown-item>
-
-            <b-dropdown-item
-              v-if="canWriteArticles"
-              to="/redakce"
-              class="dropdown-item p-0"
-            >
-              {{ $t('page-title.articles') }}
-            </b-dropdown-item>
-
-            <b-dropdown-item
-              href="#0"
-              class="sign-out-account"
-              @click="signMeOut()"
-            >
-              {{ $t('app.sign-out') }}
-            </b-dropdown-item>
-          </b-nav-item-dropdown>
-
-          <b-nav-item-dropdown right toggle-class="text-warning">
-            <template #button-content>
-              <BIconInfoCircle scale="2" />
-            </template>
-
-            <b-dropdown-item href="/o/napoveda">
-              {{ $t('app.help') }}
-            </b-dropdown-item>
-            <b-dropdown-item href="/o/mise">
-              {{ $t('app.our-mission') }}
-            </b-dropdown-item>
-            <b-dropdown-item href="/o/kontakt">
-              {{ $t('app.contact') }}
-            </b-dropdown-item>
-            <b-dropdown-item href="/o/reklama">
-              {{ $t('app.advertisement') }}
-            </b-dropdown-item>
-            <b-dropdown-item href="/o/podminky">
-              {{ $t('app.terms') }}
-            </b-dropdown-item>
-            <b-dropdown-item href="/o/soukromi">
-              {{ $t('app.privacy') }}
-            </b-dropdown-item>
-            <b-dropdown-item href="#0" @click="manageCookies()">
-              {{
-                $t('app.cookies')
-              }}
-            </b-dropdown-item>
-          </b-nav-item-dropdown>
-        </b-navbar-nav>
-      </b-navbar>
-
-      <!--      <info-box />-->
-
-      <!--      <b-button-->
-      <!--        v-if="updateExists"-->
-      <!--        class="w-100 fixed-top bg-warning text-dark rounded-0 border-warning"-->
-      <!--        @click="refreshApp"-->
-      <!--      >-->
-      <!--        {{ $t('app.update') }}-->
-      <!--      </b-button>-->
+    <header class="header">
+      <nuxt-link to="/" class="flex items-center">
+        <img class="max-w-[60px]" src="@/static/images/logo.svg" alt="">
+        <div class="ml-[12px] flex flex-col justify-start items-start logo-text">
+          <h5 class="uppercase text-[#e0a800] text-[24px]">{{ $t('app.name') }}</h5>
+          <h5 class="uppercase text-white text-[11px]">{{ $t('app.slogan') }}</h5>
+        </div>
+      </nuxt-link>
+      <div>
+        <nuxt-link to="" class="text-[#e0a800] text-[16px] duration-100 hover:text-[#FFF]">Login / Registration</nuxt-link>
+      </div>
     </header>
-    <main>
+    <main class="main-w-h">
       <Nuxt />
     </main>
     <!--    <CookiesBox @cookiePreferenceChange="handleCookies($event)" />-->
+    <FooterBottom class="mt-3" />
   </div>
 </template>
 
@@ -138,6 +32,7 @@ import {
   BNavItem
   // BButton
 } from 'bootstrap-vue';
+import FooterBottom from '../components/layout/FooterBottom.vue';
 // import update from './modules/mixins/update';
 // import InfoBox from '@/components/molecules/InfoBox.vue';
 // import CookiesBox from '@/components/molecules/CookiesBox.vue';
@@ -156,6 +51,8 @@ export default {
     BNavItem
     // CookiesBox,
     // InfoBox
+    ,
+    FooterBottom
   },
   // mixins: [update],
   computed: {
@@ -204,3 +101,25 @@ export default {
   }
 };
 </script>
+
+<style>
+.header {
+  background-color: #343a40 !important;
+  min-height: 90px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+}
+
+.logo-text {
+  @media screen and (max-width: 550px) {
+    display: none;
+  }
+}
+
+.main-w-h {
+  width: 100vw;
+  min-height: 67vh;
+}
+</style>

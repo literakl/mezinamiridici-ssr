@@ -1,4 +1,5 @@
 export default {
+  loading: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   ssr: true,
   head: {
@@ -16,7 +17,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-
+  
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     './assets/css/custom.scss'
@@ -47,8 +48,10 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
    // '@nuxtjs/eslint-module',
-   '@nuxtjs/tailwindcss',
-   "@nuxtjs/svg"
+   "@nuxtjs/svg",
+   '@nuxtjs/moment',
+    '@nuxtjs/tailwindcss',
+    '@nuxt/postcss8',    
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -56,13 +59,19 @@ export default {
     '@nuxt/image',
     '@nuxtjs/axios',
     '@nuxtjs/i18n',
-    'bootstrap-vue/nuxt',
-    '@nuxtjs/dotenv'
+    // 'bootstrap-vue/nuxt',
+    '@nuxtjs/dotenv',
+    '@nuxtjs/tailwindcss',
+    'vue-social-sharing/nuxt'
+
   ],
 
+  tailwindcss: {
+    viewer: false
+  },
 
   server: {
-    port: 8080
+    port: 2712
   },
 
   env: {
@@ -89,5 +98,11 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ['vee-validate/dist/rules'],
+    postcss: {
+      plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+      },
+    },
   }
 }

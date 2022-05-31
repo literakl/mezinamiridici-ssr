@@ -35,7 +35,8 @@ html[theme="default"] {
   --box-shadow: -2px 2px 3px rgba(57, 73, 76, 0.1);
   --big-shadow: 10px 10px 52px -30px rgba(0, 0, 0, 0.75);
   --inside-padding: 18px 25px;
-  -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
+  -webkit-text-size-adjust: 100%;
+  /* Prevent font scaling in landscape while allowing user zoom */
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
@@ -128,7 +129,8 @@ button:focus {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  resize: none; /*remove the resize handle on the bottom right*/
+  resize: none;
+  /*remove the resize handle on the bottom right*/
   box-shadow: none !important;
 }
 
@@ -167,6 +169,7 @@ select {
 ::-webkit-scrollbar-thumb:hover {
   background: #bebebe;
 }
+
 button.btn-warning {
   padding-left: 20px !important;
   padding-right: 20px !important;
@@ -194,34 +197,47 @@ svg {
   margin: 0;
   padding: 0;
   display: block;
+
   a {
     padding: 0;
     width: 60px;
   }
+
   img {
     width: 100%;
   }
 }
 
 .rightmenu {
+  .show {
+
+    position: absolute;
+    left: -120px;
+    top: 0;
+  }
+
   li {
     a {
       display: flex;
       align-items: center;
       font-size: 15px;
       color: var(--theme-primary) !important;
+
       svg {
         font-size: 10px !important;
         margin-right: 10px;
         color: var(--theme-primary);
       }
     }
+
     a:hover,
     a:hover svg {
       color: var(--color-white) !important;
     }
+
     ul.dropdown-menu {
       border-radius: 0;
+
       li {
         a {
           padding: 5px 15px;
@@ -229,10 +245,12 @@ svg {
           font-size: 14px;
           color: var(--text-color) !important;
         }
+
         :hover {
           color: var(--link-blue) !important;
           background-color: #f8f9fa;
         }
+
         :focus :active {
           color: #333 !important;
         }
@@ -243,11 +261,13 @@ svg {
 
 .title-tag {
   margin: 0 0 0 10px;
+
   h2 {
     font-size: 23px;
     margin: 0;
     text-transform: uppercase;
   }
+
   span {
     font-size: 12px;
   }
@@ -255,15 +275,18 @@ svg {
 
 .no-padding .card-header {
   padding: 0 !important;
+
   li {
     a {
       color: #333;
       border-bottom: 1px solid #ddd;
     }
+
     a.active {
       border-radius: 0;
       font-weight: 400;
     }
+
     :active {
       background-color: #f8f9fa;
     }
@@ -281,9 +304,11 @@ svg {
       color: var(--text-color-light);
       font-size: 14px;
     }
+
     :hover {
       border: 1px solid transparent;
     }
+
     .active {
       font-weight: 400;
       border-radius: 3px;
@@ -299,28 +324,34 @@ svg {
   width: 100%;
 }
 
-.post-content > h1 {
+.post-content>h1 {
   font-size: 21px;
 }
+
 .wrap-analyze-showcase .form-row legend {
   padding-top: 0;
   padding-bottom: 0;
 }
+
 .closebtn {
   position: absolute;
   right: 20px;
   cursor: pointer;
 }
+
 .closebtn svg:hover {
   color: var(--link-blue) !important;
 }
+
 @media (min-width: 1920px) {
   svg {
     font-size: 17px;
   }
+
   .brand-pic a {
     width: 90px;
   }
+
   .brand-pic img {
     width: 100%;
     margin-right: 15px;
@@ -331,23 +362,29 @@ svg {
   h2 {
     font-size: 1.3rem;
   }
+
   .brand-pic {
     width: 50px;
+
     img {
       width: 90%;
     }
   }
+
   .title-tag {
     padding-right: 10px;
   }
+
   .no-padding ul.nav-tabs {
     border-color: #f3f3f3;
+
     li {
       a {
         padding: 0.5rem 1rem;
       }
     }
   }
+
   .w-75 {
     max-width: 100%;
     width: 100% !important;
@@ -361,24 +398,30 @@ svg {
     justify-content: space-evenly;
     position: relative;
   }
+
   .navbar-nav .dropdown-menu {
     position: absolute;
     left: 0;
     float: none;
   }
+
   .rightmenu li:last-child .dropdown-menu {
     right: 0;
     left: unset;
   }
+
   .rightmenu li a {
     padding: 0 6px !important;
     font-size: 14px;
   }
+
   .rightmenu li ul.dropdown-menu li a {
     padding: 5px 15px !important;
   }
+
   .no-padding ul.nav-tabs {
     border-color: #f3f3f3;
+
     li {
       a {
         font-size: 13px;
@@ -387,7 +430,8 @@ svg {
     }
   }
 }
-.post-content > div > iframe {
+
+.post-content>div>iframe {
   width: 55%;
   min-height: 450px;
 }

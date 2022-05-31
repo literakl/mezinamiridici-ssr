@@ -1,88 +1,108 @@
 <template>
   <div>
-    <div class="pt-3 m-auto pb-3">
-      <h1 class="title__gray">
-        Turning at an intersection without turn signals
-      </h1>
-      <div class="descriptions d-flex justify-content-center align-items-center">
-        <img src="~/static/images/mail.svg" class="mt-1" alt="">
-        <h5 class="descriptions__votes ml-1 mr-2">
-          votes: {{ votes }}
-        </h5>
-        <img src="~/static/images/comment.svg" alt="">
-        <h5 class="descriptions__comments ml-1 mr-2">
-          {{ comments }}
-        </h5>
-        <h5 class="descriptions__time">
-          {{ currentTime }}
-        </h5>
+    <div class="_loading" v-if="pending">
+      <div class="spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
-      <div class="poll-inside display-flex justify-content-center">
-        <h4 class="poll-inside__question mt-3 mb-2">
-          How do you see it?
-        </h4>
-        <div class="poll-inside__buttons display-flex">
-          <a href="" class="poll-inside__button btn-green">
-            <img src="~/static/images/happy.svg" alt="">
-            Not a problem
-          </a>
-
-          <a href="" class="poll-inside__button btn-blue">
-            <img src="~/static/images/ok.svg" alt="">
-            Banalita
-          </a>
-
-          <a href="" class="poll-inside__button btn-yellow">
-            <img src="~/static/images/dislike.svg" alt="">
-            It bothers me
-          </a>
-
-          <a href="" class="poll-inside__button btn-red">
-            <img src="~/static/images/angry.svg" alt="">
-            It annoys me
-          </a>
+    </div>
+    <div v-else>
+      <!-- <pre>
+      {{ commentLast }}
+    </pre> -->
+      <div class="pt-3 m-auto pb-3">
+        <h1 class="title__gray">
+          Turning at an intersection without turn signals
+        </h1>
+        <div class="descriptions d-flex justify-content-center align-items-center">
+          <img src="~/static/images/mail.svg" class="mt-1" alt="">
+          <h5 class="descriptions__votes ml-1 mr-2">
+            votes: {{ votes }}
+          </h5>
+          <img src="~/static/images/comment.svg" alt="">
+          <h5 class="descriptions__comments ml-1 mr-2">
+            {{ lastCommit }}
+          </h5>
+          <h5 class="descriptions__time">
+            {{ currentTime }}
+          </h5>
         </div>
-      </div>
-      <div class="container">
-        <div class="row py-2">
-          <div class="col-12 py-2 incident d-flex justify-content-between align-items-center">
-            <h5 class="incident__text">
-              yesterday
-            </h5>
-            <div class="d-flex align-items-center justify-content-center">
-              <div class="incident__informations d-flex align-items-center justify-content-center">
-                <img src="~/static/images/crashes.svg" alt="crash">
-                <h4>
-                  + {{ accident }}
-                </h4>
+        <div class="poll-inside display-flex justify-content-center">
+          <h4 class="poll-inside__question mt-3 mb-2">
+            How do you see it?
+          </h4>
+          <div class="poll-inside__buttons display-flex">
+            <a href="" class="poll-inside__button btn-green">
+              <img src="~/static/images/happy.svg" alt="">
+              Not a problem
+            </a>
+
+            <a href="" class="poll-inside__button btn-blue">
+              <img src="~/static/images/ok.svg" alt="">
+              Banalita
+            </a>
+
+            <a href="" class="poll-inside__button btn-yellow">
+              <img src="~/static/images/dislike.svg" alt="">
+              It bothers me
+            </a>
+
+            <a href="" class="poll-inside__button btn-red">
+              <img src="~/static/images/angry.svg" alt="">
+              It annoys me
+            </a>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row py-2">
+            <div class="col-12 py-2 incident d-flex justify-content-between align-items-center">
+              <h5 class="incident__text">
+                yesterday
+              </h5>
+              <div class="d-flex align-items-center justify-content-center">
+                <div class="incident__informations d-flex align-items-center justify-content-center">
+                  <img src="~/static/images/crashes.svg" alt="crash">
+                  <h4>
+                    + {{ accident.data.total.count }}
+                  </h4>
+                </div>
+                <div class="incident__informations d-flex align-items-center justify-content-center">
+                  <img src="~/static/images/tombstone.svg" alt="police">
+                  <h4>
+                    + {{ accident.data.total.impact.deaths }}
+                  </h4>
+                </div>
+                <div class="incident__informations d-flex align-items-center justify-content-center">
+                  <img src="~/static/images/ambulance.svg" alt="ambulance">
+                  <h4>
+                    + {{ accident.data.total.impact.severely + accident.data.total.impact.slightly }}
+                  </h4>
+                </div>
               </div>
-              <div class="incident__informations d-flex align-items-center justify-content-center">
-                <img src="~/static/images/tombstone.svg" alt="police">
-                <h4>
-                  + {{ death }}
-                </h4>
-              </div>
-              <div class="incident__informations d-flex align-items-center justify-content-center">
-                <img src="~/static/images/ambulance.svg" alt="ambulance">
-                <h4>
-                  + {{ ambulance }}
-                </h4>
-              </div>
+              <nuxt-link class="incident__text" to="/more-statistics">
+                More statistics &#8594;
+              </nuxt-link>
             </div>
-            <nuxt-link class="incident__text" to="/more-statistics">
-              More statistics &#8594;
-            </nuxt-link>
           </div>
         </div>
       </div>
-    </div>
-    <div class="container mx-auto mb-[30px]">
-      <div class="grid grid-cols-4 b:grid-cols-2 g:grid-cols-1 gap-[14px]">
-        <div v-for="(item, index) in 12" :key="index" class="">
-          <PostCard />
+      <div class="container mx-auto mb-[30px]">
+        <div class="grid grid-cols-4 b:grid-cols-2 g:grid-cols-1 gap-[14px]">
+          <div v-for="(item, index) in postList" :key="index" class="">
+            <PostCard :slug="item.info.slug" :typeInfo="item.type" :title="item.info.caption"
+              :author="item.info.author.nickname" :image="item.info.picture" :commentsCount="item.comments.count"
+              :day="item.info.date" />
+          </div>
         </div>
-      </div>
-      <button class="
+        <button @click="loadMore()" class="
       duration-100
       hover:bg-[#343a40]
       hover:text-[#FFFFFF]
@@ -99,39 +119,61 @@
       mx-auto
       mt-5
     ">
-        <span>
-          <img class="mr-1" src="~/static/images/arrow-down.svg" alt="">
-        </span>
-        Load more
-      </button>
+          <span>
+            <img class="mr-1" src="~/static/images/arrow-down.svg" alt="">
+          </span>
+          Load more
+        </button>
+      </div>
     </div>
-    <footer-bottom />
   </div>
 </template>
 <script>
 import PostCard from '../components/PostCard.vue'
 import { mapState } from "vuex";
-import FooterBottom from '../components/layout/FooterBottom.vue'
 export default {
   name: 'IndexPage',
-  components: { PostCard, FooterBottom },
+  components: { PostCard },
   data() {
     return {
       votes: 1,
-      comments: 1,
       currentTime: '8.5. 22:25',
-      accident: 324,
-      death: 1,
-      ambulance: 91
+      postStart: 12,
+      lastCommit: 1,
+      pending: undefined,
     };
   },
 
-    computed: {
+  computed: {
     ...mapState({
-      eventsList: (state) => state.post.eventsList,
+      postList: (state) => state.post.postList,
+      accident: (state) => state.post.accident,
+      commentLast: (state) => state.post.commentLast,
     }),
   },
 
+  async mounted() {
+    this.$fetch()
+  },
+  async fetch() {
+    this.pending = true;
+    await Promise.allSettled([
+      await this.$store.dispatch("post/fetchPostList", { start: 0, post: 12 }),
+      await this.$store.dispatch("post/fetchAccident"),
+      // await this.$store.dispatch("post/fetchCommentLast")
+    ])
+      .finally(() => {
+        this.pending = false;
+
+      })
+  },
+
+  methods: {
+    loadMore() {
+      this.$store.dispatch("post/fetchPostList", { start: 0, post: this.postStart + 12 });
+      this.postStart += 12
+    }
+  },
 }
 </script>
 <style lang="scss">
@@ -229,6 +271,12 @@ p {
     font-size: 14px;
     font-weight: 400;
     border-radius: 0.25rem;
+    transition: all ease 0.3s;
+
+    &:hover {
+      opacity: 0.9;
+      transform: scale(1.01);
+    }
 
     @media only screen and (max-width: 800px) {
       margin-top: 40px;
@@ -242,6 +290,8 @@ p {
     }
   }
 }
+
+
 
 .btn-green {
   background-color: #28A745;
@@ -324,4 +374,117 @@ p {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
 }
+
+._loading {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.load {
+  background: #000;
+  color: #FFF;
+}
+
+.spinner {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+}
+
+.spinner div {
+  position: absolute;
+  width: 50%;
+  height: 150%;
+  background: #e8ff00;
+  transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1%));
+  animation: spinner-fzua35 0.8s calc(var(--delay) * 0.8s) infinite ease;
+}
+
+// spinner-styles
+
+.spinner div:nth-child(1) {
+  --delay: 0.08000000000000002;
+  --rotation: 36;
+  --translation: 150;
+}
+
+.spinner div:nth-child(2) {
+  --delay: 0.16000000000000003;
+  --rotation: 72;
+  --translation: 150;
+}
+
+.spinner div:nth-child(3) {
+  --delay: 0.24;
+  --rotation: 108;
+  --translation: 150;
+}
+
+.spinner div:nth-child(4) {
+  --delay: 0.32000000000000006;
+  --rotation: 144;
+  --translation: 150;
+}
+
+.spinner div:nth-child(5) {
+  --delay: 0.4;
+  --rotation: 180;
+  --translation: 150;
+}
+
+.spinner div:nth-child(6) {
+  --delay: 0.48;
+  --rotation: 216;
+  --translation: 150;
+}
+
+.spinner div:nth-child(7) {
+  --delay: 0.5599999999999999;
+  --rotation: 252;
+  --translation: 150;
+}
+
+.spinner div:nth-child(8) {
+  --delay: 0.6400000000000001;
+  --rotation: 288;
+  --translation: 150;
+}
+
+.spinner div:nth-child(9) {
+  --delay: 0.7200000000000001;
+  --rotation: 324;
+  --translation: 150;
+}
+
+.spinner div:nth-child(10) {
+  --delay: 0.8;
+  --rotation: 360;
+  --translation: 150;
+}
+
+@keyframes spinner-fzua35 {
+
+  0%,
+  10%,
+  20%,
+  30%,
+  50%,
+  60%,
+  70%,
+  80%,
+  90%,
+  100% {
+    transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1%));
+  }
+
+  50% {
+    transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1.5%));
+  }
+}
 </style>
+
+

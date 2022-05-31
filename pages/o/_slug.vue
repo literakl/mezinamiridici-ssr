@@ -8,12 +8,12 @@
         <div class="post-details">
           <div class="post-author">
             <BIconPersonCircle scale="1"></BIconPersonCircle>
-            <ProfileLink :profile="article.info.author"/>
+            <ProfileLink :profile="article.info.author" />
           </div>
           <div class="post-time">
             <BIconCalendarCheck v-if="isWaiting(article)" scale="1" />
             <BIconClock v-else scale="1" />
-            <Date :date="article.info.date" format="dynamicDate"/>
+            <Date :date="article.info.date" format="dynamicDate" />
             <span v-if="article.info.state === 'draft'" style="margin-left: 5px">
               {{ $t(`generic.content.state.draft`) }}
             </span>
@@ -29,7 +29,7 @@
           </div>
           <div v-if="canEdit" class="post-edit">
             <BIconPencilSquare scale="1"></BIconPencilSquare>
-            <router-link :to="{name: 'update-article', params: { id: article._id } }">
+            <router-link :to="{ name: 'update-article', params: { id: article._id } }">
               {{ $t('generic.edit-button') }}
             </router-link>
           </div>
@@ -43,8 +43,8 @@
         <div class="post-content p3" v-html="generatedHtml"></div>
 
         <div class="content-wrap">
-          <ShareLink :item="article"/>
-          <Comments :itemId="article._id"/>
+          <ShareLink :item="article" />
+          <Comments :itemId="article._id" />
         </div>
       </div>
     </div>
@@ -176,7 +176,8 @@ export default {
   margin: 0 0 10px;
 }
 
-.post-details-wrap .post-details, .post-details-wrap .hero-details {
+.post-details-wrap .post-details,
+.post-details-wrap .hero-details {
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -203,7 +204,9 @@ export default {
   border: 0;
 }
 
-.post-time, .post-author, .post-comments {
+.post-time,
+.post-author,
+.post-comments {
   display: flex;
   align-items: center;
   font-weight: 400;
@@ -248,7 +251,8 @@ blockquote p {
   font-size: 14px;
 }
 
-.post-content h2, .post-content h3 {
+.post-content h2,
+.post-content h3 {
   font-size: 18px;
   color: var(--text-color);
 }
@@ -302,7 +306,8 @@ tbody tr td:first-child {
 .errors {
   margin-top: 1rem;
 }
-.errors .alert li{
+
+.errors .alert li {
   margin-top: 1rem;
 }
 

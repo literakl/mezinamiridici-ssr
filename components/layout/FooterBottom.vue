@@ -1,19 +1,16 @@
 <template>
   <footer class="footer w-full  min-h-[130px] py-3">
     <div class="container">
-      <div class="flex justify-between  flex-wrap">
+      <div class="footer-menu flex justify-between flex-wrap">
 
-        <div class="">
 
-          <ul class="flex flex-wrap items-center justify-between">
+          <ul class="footer-links flex flex-wrap items-center justify-between ">
             <li class="mx-2" v-for="(item, index) in footerMenu" :key="index">
               <nuxt-link class="yellow-color font-light text-base duration-100" :to="item.link">{{ item.name }}
               </nuxt-link>
             </li>
           </ul>
-        </div>
-        <div class="">
-          <ul class="flex items-center">
+          <ul class="flex items-center justify-content-center mx-auto">
             <li class="mx-2">
               <a :href="facebookLink">
                 <img class="!max-w-5 !max-h-5 min-w-5" src="~/static/images/facebook.svg" alt="icon">
@@ -30,7 +27,6 @@
               </a>
             </li>
           </ul>
-        </div>
       </div>
 
       <hr class="footer-divider w-full border-1 border-[#FFFFFF] opacity-60" />
@@ -88,7 +84,16 @@ export default {
 .footer {
   background: #343a3f;
 
-  ul {
+  &-menu {
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+
+  &-links {
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+      }
     li {
       .yellow-color {
         color: #e0a800 !important;
@@ -99,6 +104,7 @@ export default {
       }
     }
   }
+
 
   .max-w-5 {
     max-width: 20px !important;
@@ -122,7 +128,7 @@ export default {
   }
 
   .footer-end-text {
-    color: #FFE!important;
+    color: #FFE !important;
     opacity: 0.25;
     font-weight: 400;
     font-size: 16px;

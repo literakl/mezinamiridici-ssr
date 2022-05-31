@@ -54,14 +54,11 @@ export const actions = {
       this.$axios
         .get("item-stream/")
         .then((res) => {
-          console.log(res, 'resresres');
           commit("set", res.data);
           resolve();
-          // console.log(res.data, 'eventsssss');
         })
         .catch((error) => {
           reject(error);
-          console.log(error, 'érrororororororo');
         });
     });
   },
