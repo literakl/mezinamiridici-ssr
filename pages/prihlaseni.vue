@@ -72,7 +72,7 @@
 
 <script>
 import { BForm, BRow, BCol } from 'bootstrap-vue';
-import { configure } from 'vee-validate';
+import { configure, ValidationObserver } from 'vee-validate';
 import Button from '@/components/atoms/Button.vue';
 import TextInput from '@/components/atoms/TextInput.vue';
 
@@ -92,6 +92,7 @@ export default {
     BCol,
     Button,
     TextInput,
+    ValidationObserver
   },
   props: {
     message: String,

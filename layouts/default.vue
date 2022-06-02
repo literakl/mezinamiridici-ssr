@@ -9,7 +9,7 @@
         </div>
       </nuxt-link>
       <div>
-        <nuxt-link to="" class="text-[#e0a800] text-[16px] duration-100 hover:text-[#FFF]">Login / Registration</nuxt-link>
+        <nuxt-link to="/prihlaseni" class="text-[#e0a800] text-[16px] duration-100 hover:text-[#FFF]">Login / Registration</nuxt-link>
       </div>
     </header>
     <main class="main-w-h">

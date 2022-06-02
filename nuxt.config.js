@@ -56,10 +56,11 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/auth',
     '@nuxt/image',
     '@nuxtjs/axios',
     '@nuxtjs/i18n',
-    // 'bootstrap-vue/nuxt',
+    'bootstrap-vue/nuxt',
     '@nuxtjs/dotenv',
     '@nuxtjs/tailwindcss',
     'vue-social-sharing/nuxt'
