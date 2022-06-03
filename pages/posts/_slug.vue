@@ -46,8 +46,9 @@
                 more readers. Recommend the server <a href="https://www.mezinamiridici.cz/"> Between Us Drivers </a> to
                 friends,
                 share <a href="">this article, </a> add <a href=""> our RSS </a> to the
-                reader. If you have a website, insert a link to our server <a href="https://www.mezinamiridici.cz/"> Between Us Drivers. </a>
-                 Thank you in advance.
+                reader. If you have a website, insert a link to our server <a href="https://www.mezinamiridici.cz/">
+                  Between Us Drivers. </a>
+                Thank you in advance.
               </div>
             </div>
           </div>
@@ -66,8 +67,8 @@ export default {
   data() {
     return {
       defaultSlug: this.$route.params.slug,
-      urlPage: window.location.href,
       pending: undefined,
+      urlPage: ''
     };
   },
   computed: {
@@ -76,12 +77,15 @@ export default {
     }),
   },
   async mounted() {
-    this.$fetch();    
+    this.urlPage =  window.location.href,
+
+      this.$fetch();
   },
   async fetch() {
     this.pending = true;
     await this.$store.dispatch("post/fetchPostSingle", { slug: this.defaultSlug })
-      .finally(() => (this.pending = false))  },
+      .finally(() => (this.pending = false))
+  },
   methods: {
     closeInfoBox() {
       document.getElementById("infoBox").classList.add("hidden");
