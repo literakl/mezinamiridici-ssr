@@ -59,6 +59,7 @@ export default {
     '@nuxtjs/auth',
     '@nuxt/image',
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
     '@nuxtjs/i18n',
     'bootstrap-vue/nuxt',
     '@nuxtjs/dotenv',
