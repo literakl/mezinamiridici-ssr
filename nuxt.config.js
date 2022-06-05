@@ -50,7 +50,6 @@ export default {
    // '@nuxtjs/eslint-module',
    "@nuxtjs/svg",
    '@nuxtjs/moment',
-    '@nuxtjs/tailwindcss',
     '@nuxt/postcss8',    
   ],
 
@@ -63,14 +62,10 @@ export default {
     '@nuxtjs/i18n',
     'bootstrap-vue/nuxt',
     '@nuxtjs/dotenv',
-    '@nuxtjs/tailwindcss',
     'vue-social-sharing/nuxt'
 
   ],
 
-  tailwindcss: {
-    viewer: false
-  },
 
   server: {
     port: 2712
@@ -102,7 +97,6 @@ export default {
     transpile: ['vee-validate/dist/rules'],
     postcss: {
       plugins: {
-        tailwindcss: {},
         autoprefixer: {},
       },
     },

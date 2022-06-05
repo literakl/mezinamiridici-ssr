@@ -9,7 +9,6 @@ module.exports = {
     "./node_modules/@themesberg/flowbite/**/*.js"
   ],
   plugins: [
-    require("@tailwindcss/line-clamp"),
   ],
   theme: {
     colors: {

@@ -95,30 +95,14 @@
         </div>
       </div>
       <div class="container mx-auto mb-[30px]">
-        <div class="grid grid-cols-4 b:grid-cols-2 g:grid-cols-1 gap-[14px]">
-          <div v-for="(item, index) in postList" :key="index" class="">
+        <div class="row postcards">
+          <div v-for="(item, index) in postList" :key="index" class="col-lg-3 col-md-6 col-sm-12 ">
             <PostCard :slug="item.info.slug" :typeInfo="item.type" :title="item.info.caption"
               :author="item.info.author.nickname" :image="item.info.picture" :commentsCount="item.comments.count"
               :day="item.info.date" />
           </div>
         </div>
-        <button @click="loadMore()" class="
-      duration-100
-      hover:bg-[#343a40]
-      hover:text-[#FFFFFF]
-      bg:transparent 
-      flex
-      items-center
-      py-2
-      px-4
-      rounded-md
-    text-[#343a40]
-      border-2 
-      border-solid
-    border-[#343a40]
-      mx-auto
-      mt-5
-    ">
+        <button @click="loadMore()" class="more-button">
           <span>
             <img class="mr-1" src="~/static/images/arrow-down.svg" alt="">
           </span>
@@ -187,6 +171,24 @@ p {
   margin: 0 !important;
   padding: 0 !important;
   box-sizing: border-box;
+}
+
+.more-button {
+  color: #343a40;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 2px solid #343a40;
+  margin: 0 auto;
+  margin-top: 20px;
+  transition: all ease 0.3s;
+
+  &:hover {
+    background: #343a40;
+    color: #FFFFFF;
+  }
 }
 
 .title__gray {
@@ -291,6 +293,9 @@ p {
   }
 }
 
+.postcards {
+  row-gap: 22px;
+}
 
 
 .btn-green {

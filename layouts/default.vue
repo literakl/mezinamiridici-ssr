@@ -1,15 +1,15 @@
 <template>
   <div>
     <header class="header">
-      <nuxt-link to="/" class="flex items-center">
-        <img class="max-w-[60px]" src="@/static/images/logo.svg" alt="">
-        <div class="ml-[12px] flex flex-col justify-start items-start logo-text">
-          <h5 class="uppercase text-[#e0a800] text-[24px]">{{ $t('app.name') }}</h5>
-          <h5 class="uppercase text-white text-[11px]">{{ $t('app.slogan') }}</h5>
+      <nuxt-link to="/" class="d-flex align-items-center">
+        <img class="header__logo" src="@/static/images/logo.svg" alt="">
+        <div class="header__text">
+          <h5 class="header__text-yellow">{{ $t('app.name') }}</h5>
+          <h5 class="header__text-white">{{ $t('app.slogan') }}</h5>
         </div>
       </nuxt-link>
       <div>
-        <nuxt-link to="/prihlaseni" class="text-[#e0a800] text-[16px] duration-100 hover:text-[#FFF]">Login / Registration</nuxt-link>
+        <nuxt-link to="/prihlaseni" class="header__registration">Login / Registration</nuxt-link>
       </div>
     </header>
     <main class="main-w-h">
@@ -102,7 +102,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .header {
   background-color: #343a40 !important;
   min-height: 90px;
@@ -110,13 +110,51 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 0 30px;
-}
 
-.logo-text {
-  @media screen and (max-width: 550px) {
-    display: none;
+  &__logo {
+    max-width: 60px;
+  }
+
+  &__text {
+    margin-left: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    @media screen and (max-width: 550px) {
+      display: none;
+    }
+
+    &-yellow {
+      text-transform: uppercase;
+      color: #e0a800;
+      font-size: 16px;
+      transition: all ease 0.3s;
+    }
+
+    &-white {
+      text-transform: uppercase;
+      color: #FFFFFF;
+      font-size: 11px;
+      transition: all ease 0.3s;
+
+      &:hover {
+        color: #FFF;
+      }
+    }
+  }
+
+  &__registration {
+    color: #e0a800;
+    font-size: 16px;
+    transition: all ease 0.4s;
+    &:hover {
+        color: #FFF;
+      }
   }
 }
+
 
 .main-w-h {
   width: 100vw;

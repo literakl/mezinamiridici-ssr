@@ -15,7 +15,7 @@
       </div>
     </div>
     <div v-else class="relative">
-      <div class="info-box w-full h-12" id="infoBox">
+      <div class="info-box" id="infoBox">
         <h4>
           The aim of the site is to prevent traffic accidents through the exchange of views and education.
           <nuxt-link to="/">Our missions</nuxt-link>
@@ -29,14 +29,12 @@
             <div class="single pt-3">
               <h4 class="single__title">{{ postSingle.data.info.caption }}</h4>
               <div class="single__informs">
-                <img class="max-w-[26px]" src="~/static/images/userava.svg" alt="">
-                <h5 class="text-[#777a7c] font-normal text-sm ml-1 mt-2">{{ postSingle.data.info.author.nickname }}</h5>
-                <img class="max-w-[26px] ml-4 mr-1" src="~/static/images/clock.svg" alt="">
-                <h4 class="font-normal text-[#777a7c] text-sm mt-2">{{
-                    $moment(postSingle.data.info.date).format("DD.M.")
-                }}</h4>
-                <img class="max-w-[26px] ml-3 mr-1" src="~/static/images/comment.svg" alt="">
-                <h4 class="font-normal text-[#777a7c] text-sm mt-2">{{ (postSingle.data.comments.count) }}</h4>
+                <img class="single__ava-image" src="~/static/images/userava.svg" alt="">
+                <h5 class="single__nickname">{{ postSingle.data.info.author.nickname }}</h5>
+                <img class="single__clock-image" src="~/static/images/clock.svg" alt="">
+                <h4 class="single__date">{{$moment(postSingle.data.info.date).format("DD.M.")}}</h4>
+                <img class="single__comment-image" src="~/static/images/comment.svg" alt="">
+                <h4 class="single__comment">{{ (postSingle.data.comments.count) }}</h4>
               </div>
               <div class="divider w-full h-1 bg-[#AEB3B7] my-[4px]"></div>
               <div class="static-data" v-html="postSingle.data.data.content"></div>
@@ -77,7 +75,7 @@ export default {
     }),
   },
   async mounted() {
-    this.urlPage =  window.location.href,
+    this.urlPage = window.location.href,
 
       this.$fetch();
   },
@@ -107,7 +105,7 @@ export default {
   font-weight: 400;
   display: flex;
   align-items: center;
-
+  height: 48px;
   h4 {
     font-size: 16px;
     margin: 0 auto;
@@ -119,7 +117,8 @@ export default {
   }
 
   .close-icon {
-    margin-left: 20px;
+    cursor: pointer;
+    margin :0 20px;
     max-width: 16px;
   }
 
@@ -173,8 +172,46 @@ export default {
     display: flex;
     align-items: center;
     border-bottom: 1px solid #dee0e1;
-    margin-bottom: 20px !important;
+    margin: 20px 0 !important;
     padding: 0 0 5px;
+  }
+
+  &__ava-image {
+    max-width: 26px;
+  }
+
+  &__nickname {
+    color: #777a7c;
+    font-weight: 400;
+    font-size: 12px;
+    margin-left: 4px !important;
+    margin-top: 8px;
+  }
+
+  &__clock-image {
+    max-width: 26px;
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+
+  &__date {
+    font-weight: 400;
+    color: #777a7c;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+
+&__comment-image {
+    max-width: 26px;
+    margin-left: 12px;
+    margin-right: 4px;
+  }
+
+&__comment {
+  font-weight: 400;
+  color: #777a7c;
+  font-size: 12px;
+  margin-top: 8px;
   }
 
   .static-data {
@@ -185,9 +222,9 @@ export default {
     }
 
     >div iframe {
-      width: 55%;
+      width: 85%;
       min-height: 450px;
-      margin: 0 auto;
+      margin-left: 5% !important;
 
       @media screen and (max-width: 700px) {
         width: 100%;
@@ -199,7 +236,7 @@ export default {
     >div img {
       vertical-align: middle;
       max-width: 600px;
-      margin: 0 auto;
+      margin: 0 auto !important;
       object-fit: cover;
       height: auto;
 
@@ -210,11 +247,11 @@ export default {
     }
 
     >div ul {
-      margin: 8px 0;
+      margin: 8px 0 !important;
     }
 
     >div table {
-      margin: 15px 0;
+      margin: 15px 0 !important;
       max-width: 90%;
     }
 
@@ -224,7 +261,7 @@ export default {
     padding: 0.75rem 1.25rem;
     border: 1px solid transparent;
     border-radius: 0.25rem;
-    margin: 20px 0;
+    margin: 20px 0 0 0;
 
     a {
       color: #777a7c;

@@ -1,31 +1,25 @@
 <template>
-  <nuxt-link :to="'/posts/' + `${slug}`" class="
-  postcard block
-  cursor-pointer 
-  bg-white 
-  w-full
-  relative
-  h-[300px]">
-    <img class="relative w-full h-[180px] object-cover" :src="image" alt="post-image">
-    <div class="w-full absolute top-[163px] flex justify-between">
-      <span class="bg-white text-[#777a7c] text-xs font-normal py-0 block px-[10px]">{{typeInfo}}</span>
-      <span class="bg-white text-[#777a7c] text-xs font-normal py-0 block px-[10px]">{{$moment(day).format("DD.M.")}}</span>
+  <nuxt-link :to="'/posts/' + `${slug}`" class="postcard">
+    <img class="postcard__img" :src="image" alt="post-image">
+    <div class="postcard__container">
+      <span class="postcard__status">{{typeInfo}}</span>
+      <span class="postcard__status">{{$moment(day).format("DD.M.")}}</span>
     </div>
-    <h4 class="text-[#131518] !my-[10px] !mx-[16px] font-normal text-base line-clamp-2 min-h-[48px]">
+    <h4 class="postcard__title line-clamp-2">
       {{title}}
     </h4>
-    <div class="w-[95%] h-[1px] bg-[#d5d5d5] mx-auto"></div>
-    <div class="w-[95%] mx-auto flex justify-between mt-[10px]">
+    <div class="postcard__divider"></div>
+    <div class="postcard__description">
       <div>
-        <div v-if="true" class="flex items-center ">
-          <img class="max-w-[26px]" src="~/static/images/userava.svg" alt="">
-          <h5 class="text-[#777a7c] font-normal text-sm ml-[3px]">{{author}}</h5>
+        <div v-if="true" class="d-flex align-items-center ">
+          <img class="postcard__ava" src="~/static/images/userava.svg" alt="">
+          <h5 class="postcard__name">{{author}}</h5>
         </div>
         <div v-else-if="vote"></div>
       </div>
-      <div class="flex items-center">
-        <img class="max-w-[26px]" src="~/static/images/comment.svg" alt="">
-        <h5 class="text-[#777a7c] font-normal text-sm ml-[3px]">{{commentsCount}}</h5>
+      <div class="d-flex align-items-center">
+        <img class="postcard__ava" src="~/static/images/comment.svg" alt="">
+        <h5 class="postcard__comment">{{commentsCount}}</h5>
       </div>
     </div>
   </nuxt-link>
@@ -51,15 +45,83 @@ export default {
 
 <style lang="scss" scoped>
 .postcard {
+  display: block;
+  background: #FFFFFF;
+  width: 100%;
+  position: relative;
+  height: 300px;
   transition: 0.2s ease;
   box-shadow: 1px 1px 10px #c1c1c1;
+  cursor: pointer;
   &:hover{
     transform: scale(1.05);
   }
 
-  img {
+  &__img {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
     box-shadow: 10px 10px 52px -30px rgba(0, 0, 0, 0.75);
     border: 5px solid #fff;
+  }
+
+  &__container {
+    width: 100%;
+    position: absolute;
+    top: 162px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__status {
+    color: #777a7c;
+    background-color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 0 10px !important;
+
+  }
+
+  &__title {
+    color: #131518;
+    margin: 10px 16px !important;
+    font-weight: 400;
+    font-size: 16px;
+    min-height: 48px;
+  }
+
+  &__divider{
+    width: 95%;
+    height: 1px;
+    background: #d5d5d5;
+    margin: 0 auto;
+  }
+
+  &__description {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px !important;
+  }
+
+  &__ava {
+    max-width: 26px;
+  }
+
+   &__name {
+    color: #777a7c;
+    font-weight: 400;
+    font-size: 12px;
+    margin-left: 3px !important;
+  }
+
+  &__comment {
+    color: #777a7c;
+    font-weight: 400;
+    font-size: 12px;
+    margin-left: 3px !important;
   }
 }
 </style>
