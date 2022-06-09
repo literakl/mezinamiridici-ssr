@@ -32,7 +32,7 @@
                 <img class="single__ava-image" src="~/static/images/userava.svg" alt="">
                 <h5 class="single__nickname">{{ postSingle.data.info.author.nickname }}</h5>
                 <img class="single__clock-image" src="~/static/images/clock.svg" alt="">
-                <h4 class="single__date">{{$moment(postSingle.data.info.date).format("DD.M.")}}</h4>
+                <h4 class="single__date">{{ $moment(postSingle.data.info.date).format("DD.M.") }}</h4>
                 <img class="single__comment-image" src="~/static/images/comment.svg" alt="">
                 <h4 class="single__comment">{{ (postSingle.data.comments.count) }}</h4>
               </div>
@@ -48,6 +48,8 @@
                   Between Us Drivers. </a>
                 Thank you in advance.
               </div>
+
+              <pre>{{postSingle.data_id}}</pre>
             </div>
           </div>
         </div>
@@ -62,6 +64,12 @@ import { mapState } from "vuex";
 import Socials from "../../components/Socials.vue";
 export default {
   name: "IndexPage",
+    computed: {
+      ...mapState({
+        postSingle: (state) => state.post.postSingle,
+        comments: (state) => state.comments.comments
+      }),
+    },
   data() {
     return {
       defaultSlug: this.$route.params.slug,
@@ -69,19 +77,16 @@ export default {
       urlPage: ''
     };
   },
-  computed: {
-    ...mapState({
-      postSingle: (state) => state.post.postSingle,
-    }),
-  },
   async mounted() {
     this.urlPage = window.location.href,
-
       this.$fetch();
   },
   async fetch() {
     this.pending = true;
-    await this.$store.dispatch("post/fetchPostSingle", { slug: this.defaultSlug })
+    await Promise.allSettled([
+    await this.$store.dispatch("post/fetchPostSingle", { slug: this.defaultSlug }),
+    // await this.$store.dispatch("comments/fetchComments",{ id: '1fpib4lqns5' })
+    ])
       .finally(() => (this.pending = false))
   },
   methods: {
@@ -106,6 +111,7 @@ export default {
   display: flex;
   align-items: center;
   height: 48px;
+
   h4 {
     font-size: 16px;
     margin: 0 auto;
@@ -118,7 +124,7 @@ export default {
 
   .close-icon {
     cursor: pointer;
-    margin :0 20px;
+    margin: 0 20px;
     max-width: 16px;
   }
 
@@ -201,17 +207,17 @@ export default {
     margin-top: 8px;
   }
 
-&__comment-image {
+  &__comment-image {
     max-width: 26px;
     margin-left: 12px;
     margin-right: 4px;
   }
 
-&__comment {
-  font-weight: 400;
-  color: #777a7c;
-  font-size: 12px;
-  margin-top: 8px;
+  &__comment {
+    font-weight: 400;
+    color: #777a7c;
+    font-size: 12px;
+    margin-top: 8px;
   }
 
   .static-data {

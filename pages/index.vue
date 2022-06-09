@@ -144,7 +144,7 @@ export default {
     await Promise.allSettled([
       await this.$store.dispatch("post/fetchPostList", { start: 0, post: 12 }),
       await this.$store.dispatch("post/fetchAccident"),
-      // await this.$store.dispatch("post/fetchCommentLast")
+      // await this.$store.dispatch("comments/fetchComments"),
     ])
       .finally(() => {
         this.pending = false;

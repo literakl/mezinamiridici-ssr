@@ -23,9 +23,8 @@ export const mutations = {
 
 export const actions = {
   async fetchPostList({ commit }, {start, post}) {
-    return await new Promise((resolve, reject) => {
-      this.$axios 
-        .get(`/item-stream?start=${start}&ps=${post}`)
+    return new Promise((resolve, reject) => {
+      this.$axios.get(this.$config.API_ENDPOINT + `/item-stream?start=${start}&ps=${post}`)
         .then((res) => {
           commit("setPostList", res.data.data);
           resolve();
@@ -40,7 +39,7 @@ export const actions = {
   async fetchPostSingle({ commit }, {slug}) {
     return await new Promise((resolve, reject) => {
       this.$axios
-        .get(`/content/${slug}`)
+        .get(this.$config.API_ENDPOINT + `/content/${slug}`)
         .then((res) => {
           commit("setPostSingle", res.data);
           // console.log(res.data, 'singleeeeeeeee')
@@ -56,7 +55,7 @@ export const actions = {
   async fetchAccident({ commit }) {
     return await new Promise((resolve, reject) => {
       this.$axios
-        .get('/accidents/last')
+      .get(this.$config.API_ENDPOINT + '/accidents/last')
         .then((res) => {
           commit("setAccident", res.data);
           console.log(res.data, 'accidents')
@@ -69,11 +68,10 @@ export const actions = {
     });
   },
 
-  
   async fetchCommentLast({ commit }) {
     return await new Promise((resolve, reject) => {
       this.$axios
-        .get('/bff/polls/last')
+      .get(this.$config.BFF_ENDPOINT + '/polls/last')
         .then((res) => {
           commit("setCommentLast", res.data);
           console.log(res.data, 'accidents')

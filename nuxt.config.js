@@ -40,7 +40,12 @@ export default {
   components: true,
 
   axios: {
-    baseURL: process.env.VUE_APP_API_ENDPOINT || "https://www.mezinamiridici.cz/api/v1",
+    baseURL: process.env,
+  },
+
+  publicRuntimeConfig: {
+    API_ENDPOINT: process.env.VUE_APP_API_ENDPOINT,
+    BFF_ENDPOINT: process.env.VUE_APP_BFF_ENDPOINT
   },
 
 
@@ -55,10 +60,8 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/auth',
     '@nuxt/image',
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next',
     '@nuxtjs/i18n',
     'bootstrap-vue/nuxt',
     '@nuxtjs/dotenv',
@@ -71,9 +74,6 @@ export default {
     port: 2712
   },
 
-  env: {
-    NODE_ENV: process.env.NODE_ENV
-  },
 
   i18n: {
     locales: [
