@@ -1,13 +1,21 @@
-// import {
-//   ValidationObserver,
-//   ValidationProvider
-// } from 'vee-validate'
-// // import * as rules from 'vee-validate/dist/rules'
-// // Object.keys(rules).forEach((rule) => {
-// //   extend(rule, rules[rule]);
-// // });
-// export default ({ app }, inject) => {
-//   // Inject $hello(msg) in Vue, context and store.
-//   inject('ValidationObserver', ValidationObserver);
-//   inject('ValidationProvider', ValidationProvider);
-// }
+import { extend, localize } from "vee-validate";
+import { required, email, min } from "vee-validate/dist/rules";
+
+const dictionary = {
+    en: {
+        messages: {
+            required: () => '* Required',
+        },
+    },
+};
+
+// Install required rule.
+extend("required", required);
+
+// Install email rule.
+extend("email", email);
+
+// Install min rule.
+extend("min", min);
+
+localize(dictionary);

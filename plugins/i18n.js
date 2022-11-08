@@ -1,13 +1,14 @@
 // import Vue from 'vue';
 // import VueI18n from '@nuxtjs/i18n';
-import en from 'vee-validate/dist/locale/en.json';
-import cs from 'vee-validate/dist/locale/cs.json';
+
+import en from '../locales/en.json';
+import cs from '../locales/cs.json';
 import { localize } from 'vee-validate';
 
-localize({
-  cs, en,
-});
-localize('cs');
+// localize({
+//   cs, en,
+// });
+// localize('cs');
 // https://i18n.nuxtjs.org/extend-messages
 //
 // function loadLocaleMessages() {

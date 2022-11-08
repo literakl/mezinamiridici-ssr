@@ -67,7 +67,7 @@
         </b-row>
       </div>
     </b-form>
-  </ValidationObserver>
+  </ValidationObserver> 
 </template>
 
 <script>
@@ -113,6 +113,9 @@ export default {
         return true;
       }
     },
+  },
+  mounted() {
+    console.log('18')
   },
   methods: {
     redirectToSignUp() {
