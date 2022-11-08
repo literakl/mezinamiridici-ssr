@@ -1,5 +1,6 @@
 export const state = () => ({
   showCookiesDialog: false,
+  postList: [],
 })
 
 export const getters = {
@@ -10,6 +11,11 @@ export const mutations = {
   SHOW_COOKIES_DIALOG: (state, payload) => {
     state.showCookiesDialog = payload
   },
+
+  setPostList(state, postList) {
+    state.postList = postList;
+  },
+
 }
 export const actions = {
   FETCH_TWITTER_HTML: (context, payload) => {
@@ -42,5 +48,18 @@ export const actions = {
     const stopPlausible = options.analytics ? 'false' : 'true'
     localStorage.setItem('plausible_ignore', stopPlausible)
     component.$emit('cookiePreferenceChange', options)
+  },
+  fetchPostList({ commit }) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .get("item-stream/")
+        .then((res) => {
+          commit("set", res.data);
+          resolve();
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   },
 }

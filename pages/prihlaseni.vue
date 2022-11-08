@@ -9,26 +9,12 @@
               <div>{{ message }}</div>
             </div>
             <div class="field-area">
-              <TextInput
-                v-model="email"
-                rules="required|email"
-                name="email"
-                type="email"
-                class="w-100"
-                :label="$t('profile.email')"
-                :placeholder="$t('generic.email-placeholder')"
-              />
+              <TextInput v-model="email" rules="required|email" name="email" type="email" class="w-100"
+                :label="$t('profile.email')" :placeholder="$t('generic.email-placeholder')" />
             </div>
             <div class="field-area">
-              <TextInput
-                v-model="password"
-                rules="required"
-                class="w-100"
-                :label="$t('profile.password')"
-                :placeholder="$t('sign-in.password-placeholder')"
-                name="password"
-                type="password"
-              />
+              <TextInput v-model="password" rules="required" class="w-100" :label="$t('profile.password')"
+                :placeholder="$t('sign-in.password-placeholder')" name="password" type="password" />
             </div>
 
             <div class="w-100 d-flex flex-row-reverse mb-3 forgot-link">
@@ -54,18 +40,12 @@
         </b-row>
         <b-row class="w-85 m-auto pb-2">
           <b-col>
-            <Button
-              class="w-100 btn btn-block blue"
-              :disabled="invalid"
-              :value="$t('sign-in.sign-in-button')"
-              @clicked="signIn"/>
+            <Button class="w-100 btn btn-block blue" :disabled="invalid" :value="$t('sign-in.sign-in-button')"
+              @clicked="signIn" />
           </b-col>
           <b-col>
-            <Button
-              class="btn btn-block green"
-              id="signin__sign-up-button"
-              :value="$t('sign-in.sign-up-button')"
-              @clicked="redirectToSignUp"/>
+            <Button class="btn btn-block green" id="signin__sign-up-button" :value="$t('sign-in.sign-up-button')"
+              @clicked="redirectToSignUp" />
           </b-col>
         </b-row>
         <b-row class="w-85 m-auto pb-2">
@@ -75,20 +55,14 @@
         </b-row>
         <b-row class="w-85 m-auto pb-2">
           <b-col>
-            <Button
-              class="w-100 btn btn-block btn-facebook"
-              :value="$t('sign-in.sign-in-facebook')"
-              @clicked="auth('facebook')"/>
+            <Button class="w-100 btn btn-block btn-facebook" :value="$t('sign-in.sign-in-facebook')"
+              @clicked="auth('facebook')" />
 
-            <Button
-              class="w-100 btn btn-block btn-twitter"
-              :value="$t('sign-in.sign-in-twitter')"
-              @clicked="auth('twitter')"/>
+            <Button class="w-100 btn btn-block btn-twitter" :value="$t('sign-in.sign-in-twitter')"
+              @clicked="auth('twitter')" />
 
-            <Button
-              class="w-100 btn btn-block btn-google-plus"
-              :value="$t('sign-in.sign-in-google')"
-              @clicked="auth('google')"/>
+            <Button class="w-100 btn btn-block btn-google-plus" :value="$t('sign-in.sign-in-google')"
+              @clicked="auth('google')" />
           </b-col>
         </b-row>
       </div>
@@ -98,7 +72,7 @@
 
 <script>
 import { BForm, BRow, BCol } from 'bootstrap-vue';
-import { configure } from 'vee-validate';
+import { configure, ValidationObserver } from 'vee-validate';
 import Button from '@/components/atoms/Button.vue';
 import TextInput from '@/components/atoms/TextInput.vue';
 
@@ -118,6 +92,7 @@ export default {
     BCol,
     Button,
     TextInput,
+    ValidationObserver
   },
   props: {
     message: String,
@@ -315,5 +290,4 @@ export default {
     padding: 25px 5px;
   }
 }
-
 </style>

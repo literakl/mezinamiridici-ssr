@@ -1,5 +1,7 @@
 export default {
+  loading: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
+  ssr: true,
   head: {
     title: 'mezinamiridici-ssr',
     htmlAttrs: {
@@ -15,7 +17,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-
+  
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     './assets/css/custom.scss'
@@ -33,13 +35,27 @@ export default {
     prefetchLinks: false
   },
 
+  
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
+
+  axios: {
+    baseURL: process.env,
+  },
+
+  publicRuntimeConfig: {
+    API_ENDPOINT: process.env.VUE_APP_API_ENDPOINT,
+    BFF_ENDPOINT: process.env.VUE_APP_BFF_ENDPOINT
+  },
+
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
+   // '@nuxtjs/eslint-module',
+   "@nuxtjs/svg",
+   '@nuxtjs/moment',
+    '@nuxt/postcss8',    
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -48,23 +64,24 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/i18n',
     'bootstrap-vue/nuxt',
+    '@nuxtjs/dotenv',
+    'vue-social-sharing/nuxt'
+
   ],
 
+
   server: {
-    port: 8080
+    port: 2712
   },
 
-  env: {
-    NODE_ENV: process.env.NODE_ENV
-  },
 
   i18n: {
     locales: [
       { code: 'en', iso: 'en', file: 'en.json' },
       { code: 'cs', iso: 'cs', file: 'cs.json' },
     ],
-    defaultLocale: 'cs',
-    fallbackLocale: 'cs',
+    defaultLocale: 'en',
+    fallbackLocale: 'en',
     langDir: '~/locales/',
     strategy: 'no_prefix',
   },
@@ -78,5 +95,10 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ['vee-validate/dist/rules'],
+    postcss: {
+      plugins: {
+        autoprefixer: {},
+      },
+    },
   }
 }

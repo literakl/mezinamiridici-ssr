@@ -1,6 +1,5 @@
 const fetchSync = require('sync-fetch');
 
-const { VUE_APP_API_ENDPOINT, VUE_APP_BFF_ENDPOINT } = process.env;
 
 export default function ({ $axios, $log, store }, inject) {
   $axios.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
@@ -16,8 +15,8 @@ export default function ({ $axios, $log, store }, inject) {
     console.log('on server console')
   }
 
-  inject('api', new BudAxios($axios, VUE_APP_API_ENDPOINT));
-  inject('bff', new BudAxios($axios, VUE_APP_BFF_ENDPOINT));
+  inject('api', new BudAxios($axios, process.env.VUE_APP_API_ENDPOINT));
+  inject('bff', new BudAxios($axios, process.env.VUE_APP_BFF_ENDPOINT));
 }
 
 class BudAxios {
