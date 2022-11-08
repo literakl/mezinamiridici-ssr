@@ -13,6 +13,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@babel/helper-get-function-arity": "^7.16.7",
     "@nuxt/loading-screen": "^2.0.4",
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/auth-next": "^5.0.0-1648802546.c9880dc",

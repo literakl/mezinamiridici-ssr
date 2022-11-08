@@ -17,7 +17,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     './assets/css/custom.scss'
@@ -35,12 +35,11 @@ export default {
     prefetchLinks: false
   },
 
-  
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
   axios: {
-    baseURL: process.env,
+    baseURL: process.env.VUE_APP_API_ENDPOINT,
   },
 
   publicRuntimeConfig: {
@@ -48,14 +47,13 @@ export default {
     BFF_ENDPOINT: process.env.VUE_APP_BFF_ENDPOINT
   },
 
-
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-   // '@nuxtjs/eslint-module',
-   "@nuxtjs/svg",
-   '@nuxtjs/moment',
-    '@nuxt/postcss8',    
+    // '@nuxtjs/eslint-module',
+    "@nuxtjs/svg",
+    '@nuxtjs/moment',
+    '@nuxt/postcss8',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -69,11 +67,9 @@ export default {
 
   ],
 
-
   server: {
     port: 2712
   },
-
 
   i18n: {
     locales: [
