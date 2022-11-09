@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import normalizeVotes from '@/utils/chartUtils';
+import normalizeVotes from "../../utils/chartUtils"
 
 export default {
   name: 'SeriesBarChart',

@@ -274,10 +274,10 @@ import TableHeader from "@tiptap/extension-table-header";
 import Underline from "@tiptap/extension-underline";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
-import {getEmbedURL} from "@/modules/tiptap/embedLinkGenerate";
-import Iframe from "@/modules/tiptap/iframe";
+// import {getEmbedURL} from "@/modules/tiptap/embedLinkGenerate";
+// import Iframe from "@/modules/tiptap/iframe";
 import { BAlert, BProgress } from "bootstrap-vue";
-import store from "@/store";
+// import store from "@/store";
 import Icon from "@/components/atoms/EditorIcon.vue";
 
 async function upload(file, progress) {
@@ -363,13 +363,13 @@ export default {
     },
   },
   methods: {
-    addIframe() {
-      let url = window.prompt("URL");
-      url = getEmbedURL(url)
-      if (url) {
-        this.editor.chain().focus().setIframe({ src: url }).run();
-      }
-    },
+    // addIframe() {
+    //   let url = window.prompt("URL");
+    //   url = getEmbedURL(url)
+    //   if (url) {
+    //     this.editor.chain().focus().setIframe({ src: url }).run();
+    //   }
+    // },
     showImageModal() {
       this.$refs.fileUploadInput.click();
     },

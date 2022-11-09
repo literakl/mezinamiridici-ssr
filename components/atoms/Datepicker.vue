@@ -45,7 +45,6 @@
 export default {
   name: 'DatePicker',
   components: {
-    Datepicker,
   },
   props: {
     vid: {

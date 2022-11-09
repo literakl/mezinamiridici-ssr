@@ -83,8 +83,7 @@
 </template>
 
 <script>
-
-import normalizeVotes from '@/utils/chartUtils';
+import normalizeVotes from '../../utils/chartUtils';
 import PollButtons from '@/components/molecules/PollButtons.vue';
 import Date from '@/components/atoms/Date';
 import { BIconChatTextFill, BIconEnvelope } from 'bootstrap-vue';
