@@ -1,7 +1,6 @@
 <template>
   <ValidationProvider
     mode="eager"
-    class="w-50"
     tag="div"
     :vid="vid"
     :rules="rules"
@@ -11,19 +10,26 @@
       <label
         @click="$refs.input.focus()"
         :for="name">
-        <span v-if="label">{{ label }}</span>
-        <span v-if="label && required" class="text-danger"> *</span>
+        <div v-if="label">
+          <span class="d-label">{{ label }}</span>
+          <span>{{ required ? ' *' : '' }}</span>
+        </div>
       </label>
-      <b-form-input
+
+      <datepicker
         :class="{ 'is-invalid':errors[0], 'has-value': hasValue }"
         :id="name"
-        :type="type"
-        :disabled="disabled"
-        :placeholder="placeholder"
-        ref="input"
         v-model="innerValue"
-        >
-      </b-form-input>
+        :format="format"
+        :minimum-view="minimumView"
+        :bootstrap-styling="true"
+        :disabled-dates="disabledDates"
+        :required="required"
+        :type="type"
+        :typeable="true"
+        ref="input"
+        :name="name"/>
+
       <div
         class="p-1 text-danger"
         v-bind="ariaMsg"
@@ -35,12 +41,11 @@
 </template>
 
 <script>
-import { BFormInput } from 'bootstrap-vue';
 
 export default {
-  name: 'TextInput',
+  name: 'DatePicker',
   components: {
-    BFormInput,
+    Datepicker,
   },
   props: {
     vid: {
@@ -62,13 +67,20 @@ export default {
       type: [Object, String],
       default: '',
     },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
     placeholder: {
       type: String,
       default: '',
+    },
+    format: {
+      type: String,
+      default: 'dd MMM yyyy',
+    },
+    minimumView: {
+      type: String,
+      default: 'day',
+    },
+    disabledDates: {
+      type: Object,
     },
     type: {
       type: String,
@@ -115,3 +127,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.d-label {
+  font-weight: 300;
+  color: #000;
+}
+</style>

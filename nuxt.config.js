@@ -29,6 +29,7 @@ export default {
     '~/plugins/i18n.js',
     '~/plugins/vee-validate.js',
     '~/plugins/api.js',
+    { src: '~/plugins/vue-datepicker', ssr: false },
   ],
 
   router: {
