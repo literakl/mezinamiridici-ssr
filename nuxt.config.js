@@ -26,7 +26,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/loglevel.client.js',
-    '~/plugins/i18n.js',
+    { src: '~/plugins/i18n.js', ssr: false },
     '~/plugins/vee-validate.js',
     '~/plugins/api.js',
     { src: '~/plugins/vue-datepicker', ssr: false },
@@ -40,12 +40,12 @@ export default {
   components: true,
 
   axios: {
-    baseURL: process.env.VUE_APP_API_ENDPOINT,
+    baseURL: process.env.API_ENDPOINT,
   },
 
   publicRuntimeConfig: {
-    API_ENDPOINT: process.env.VUE_APP_API_ENDPOINT,
-    BFF_ENDPOINT: process.env.VUE_APP_BFF_ENDPOINT
+    API_ENDPOINT: process.env.API_ENDPOINT,
+    BFF_ENDPOINT: process.env.BFF_ENDPOINT
   },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -64,9 +64,32 @@ export default {
     '@nuxtjs/i18n',
     'bootstrap-vue/nuxt',
     '@nuxtjs/dotenv',
-    'vue-social-sharing/nuxt'
-
+    'vue-social-sharing/nuxt',
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
+  // router: {
+    // middleware: ['auth']
+  // },
+
+  auth: {
+    strategies: {
+      google: {
+        token: {
+          property: 'id_token'
+        },
+        refreshToken: {
+          property: 'refresh_token'
+        },
+        prompt: 'consent',
+        access_type: 'offline',
+        scope: ['profile', 'email'],
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        redirectUri: process.env.GOOGLE_REDIRECT_URI,
+        responseType: "id_token token",
+      },  
+    }
+  },
 
   server: {
     port: 2712

@@ -55,11 +55,11 @@
         </b-row>
         <b-row class="w-85 m-auto pb-2">
           <b-col>
-            <Button class="w-100 btn btn-block btn-facebook" :value="$t('sign-in.sign-in-facebook')"
-              @clicked="auth('facebook')" />
+            <Button class="w-100 btn btn-block btn-facebook" :value="$t('sign-in.sign-in-facebook')" />
+              <!-- @clicked="auth('facebook')"  -->
 
-            <Button class="w-100 btn btn-block btn-twitter" :value="$t('sign-in.sign-in-twitter')"
-              @clicked="auth('twitter')" />
+            <Button class="w-100 btn btn-block btn-twitter" :value="$t('sign-in.sign-in-twitter')" />
+              <!-- @clicked="auth('twitter')"  -->
 
             <Button class="w-100 btn btn-block btn-google-plus" :value="$t('sign-in.sign-in-google')"
               @clicked="auth('google')" />
@@ -147,25 +147,26 @@ export default {
       }
     },
     async auth(provider) {
-      if (this.$auth.isAuthenticated()) {
-        this.$auth.logout();
-      }
-      const response = await this.$auth.authenticate(provider);
-      if (response.data.socialId) {
-        this.$auth.logout();
-        const params = {
-          presetEmail: response.data.email,
-          presetNickname: response.data.name,
-          socialId: response.data.socialId,
-        };
-        await this.$router.push({
-          name: 'sign-up',
-          params,
-        });
-      } else {
-        await this.$store.dispatch('SET_SOCIAL', response.data);
-        await this.$router.push('/');
-      }
+      // if (this.$auth.isAuthenticated()) {
+      //   this.$auth.logout();
+      // }
+      // const response = await this.$auth.authenticate(provider);
+      // if (response.data.socialId) {
+      //   this.$auth.logout();
+      //   const params = {
+      //     presetEmail: response.data.email,
+      //     presetNickname: response.data.name,
+      //     socialId: response.data.socialId,
+      //   };
+      //   await this.$router.push({
+      //     name: 'sign-up',
+      //     params,
+      //   });
+      // } else {
+      //   await this.$store.dispatch('SET_SOCIAL', response.data);
+      //   await this.$router.push('/');
+      // }
+      this.$auth.loginWith('google')
     },
   },
 };

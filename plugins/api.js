@@ -15,8 +15,8 @@ export default function ({ $axios, $log, store }, inject) {
     console.log('on server console')
   }
 
-  inject('api', new BudAxios($axios, process.env.VUE_APP_API_ENDPOINT));
-  inject('bff', new BudAxios($axios, process.env.VUE_APP_BFF_ENDPOINT));
+  inject('api', new BudAxios($axios, process.env.API_ENDPOINT));
+  inject('bff', new BudAxios($axios, process.env.BFF_ENDPOINT));
 }
 
 class BudAxios {
@@ -33,7 +33,7 @@ class BudAxios {
     if (this.endpoint === 'BFF') {
       return this.axios.get(`${this.endpoint}${url}`, headers);
     } else {
-      return this.axios.get(`${VUE_APP_API_ENDPOINT}${url}`, headers);
+      return this.axios.get(`${API_ENDPOINT}${url}`, headers);
     }
   }
 
@@ -42,7 +42,7 @@ class BudAxios {
     if (this.endpoint === 'BFF') {
       return this.axios.post(`${this.endpoint}${url}`, body, headers);
     } else {
-      return this.axios.post(`${VUE_APP_API_ENDPOINT}${url}`, body, headers);
+      return this.axios.post(`${API_ENDPOINT}${url}`, body, headers);
     }
   }
 
@@ -51,7 +51,7 @@ class BudAxios {
     if (this.endpoint === 'BFF') {
       return this.axios.put(`${this.endpoint}${url}`, body, headers);
     } else {
-      return this.axios.put(`${VUE_APP_API_ENDPOINT}${url}`, body, headers);
+      return this.axios.put(`${API_ENDPOINT}${url}`, body, headers);
     }
   }
 
@@ -60,7 +60,7 @@ class BudAxios {
     if (this.endpoint === 'BFF') {
       return this.axios.patch(`${this.endpoint}${url}`, body, headers);
     } else {
-      return this.axios.patch(`${VUE_APP_API_ENDPOINT}${url}`, body, headers);
+      return this.axios.patch(`${API_ENDPOINT}${url}`, body, headers);
     }
   }
 
@@ -69,7 +69,7 @@ class BudAxios {
     if (this.endpoint === 'BFF') {
       return this.axios.delete(`${this.endpoint}${url}`, headers);
     } else {
-      return this.axios.delete(`${VUE_APP_API_ENDPOINT}${url}`, headers);
+      return this.axios.delete(`${API_ENDPOINT}${url}`, headers);
     }
   }
 
@@ -78,7 +78,7 @@ class BudAxios {
     if (this.endpoint === 'BFF') {
       return fetchSync(`${this.endpoint}${url}`, headers);
     } else {
-      return fetchSync(`${VUE_APP_API_ENDPOINT}${url}`, headers);
+      return fetchSync(`${API_ENDPOINT}${url}`, headers);
     }
   }
 
