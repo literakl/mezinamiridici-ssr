@@ -26,9 +26,13 @@ export const mutations = {
   SET_ITEMS_BY_TAG: (state, payload) => {
     state.itemsByTag = payload
   },
-  SET_CONTENT: (state, payload) => {
-    state.content = payload
+
+
+  SET_CONTENT: (state, content) => {
+    state.content = content
   },
+
+
   SET_ITEM_PICTURES: (state, payload) => {
     state.itemPictures = payload
   },
@@ -100,20 +104,30 @@ export const actions = {
     const { blogId } = payload
     return this.$api.remove(`/posts/${blogId}`, {}, context)
   },
-  FETCH_CONTENT: async (context, payload) => {
-    this.$log.debug(`FETCH_CONTENT ${payload.slug}`)
-    let response
-    try {
-      response = await this.$api.get(`/content/${payload.slug}`, context)
-    } catch (err) {
-      if (err.response.status === 404 && payload.component) {
-        await payload.component.$router.push({ name: 'junkyard' })
-        return
-      }
-    }
-    context.commit('SET_CONTENT', response.data.data)
-    return response.data.data
+
+
+  // FETCH_CONTENT: async (context, payload) => {
+  //   response = await this.$axios.get(`/content/${payload.slug}`, context)
+  //   context.commit('SET_CONTENT', response.data.data)
+  //   return response.data.data
+  // },
+
+  async FETCH_CONTENT ({commit}, {slug}) {
+    return await new Promise((resolve, reject) => {
+      this.$axios
+        .get(`/content/${slug}`)
+        .then((res) => {
+          console.log(res, '11')
+          commit('SET_CONTENT', res.data.data);
+          resolve(res);
+        })
+        .catch((error) => {
+          reject(error); // reject
+        });
+    });
   },
+
+
   UPDATE_CONTENT_HTML: async (context, payload) => {
     this.$log.debug('UPDATE_CONTENT_HTML')
     const { itemId } = payload

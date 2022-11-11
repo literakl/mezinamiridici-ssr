@@ -15,7 +15,6 @@ export const mutations = {
   setPostList(state, postList) {
     state.postList = postList;
   },
-
 }
 export const actions = {
   FETCH_TWITTER_HTML: (context, payload) => {

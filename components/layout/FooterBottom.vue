@@ -43,27 +43,27 @@ export default {
       footerMenu: [
         {
           name: 'Our missions',
-          link: ''
+          link: '/pages/mise'
         },
         {
           name: 'Help',
-          link: ''
+          link: '/pages/napoveda'
         },
         {
           name: 'Contact',
-          link: ''
+          link: '/pages/contact'
         },
         {
           name: 'Advertising',
-          link: ''
+          link: '/pages/reklama'
         },
         {
           name: 'Terms of use',
-          link: ''
+          link: '/pages/podminky'
         },
         {
           name: 'Protection of personal data',
-          link: ''
+          link: '/pages/soukromi'
         },
         {
           name: 'Cookie settings',

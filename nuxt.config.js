@@ -87,7 +87,19 @@ export default {
         clientId: process.env.GOOGLE_CLIENT_ID,
         redirectUri: process.env.GOOGLE_REDIRECT_URI,
         responseType: "id_token token",
+        endpoints: {
+          token: 'http://localhost:2712/user/google/',  
+          userInfo: 'http://localhost:2712/auth/user/' 
+        },
       },  
+      facebook: {
+        clientId: process.env.FACEBOOK_CLIENT_ID,
+        redirectUri: process.env.FACEBOOK_REDIRECT_URI,
+        scope: ['public_profile', 'email'],
+        endpoints: {
+          userInfo: 'https://graph.facebook.com/v6.0/me?fields=id,name,picture{url}',
+        },
+      },
     }
   },
 

@@ -55,11 +55,9 @@
         </b-row>
         <b-row class="w-85 m-auto pb-2">
           <b-col>
-            <Button class="w-100 btn btn-block btn-facebook" :value="$t('sign-in.sign-in-facebook')" />
-              <!-- @clicked="auth('facebook')"  -->
+            <Button @clicked="auth('facebook')" class="w-100 btn btn-block btn-facebook" :value="$t('sign-in.sign-in-facebook')" />
 
-            <Button class="w-100 btn btn-block btn-twitter" :value="$t('sign-in.sign-in-twitter')" />
-              <!-- @clicked="auth('twitter')"  -->
+            <Button @clicked="auth('twitter')" class="w-100 btn btn-block btn-twitter" :value="$t('sign-in.sign-in-twitter')" />
 
             <Button class="w-100 btn btn-block btn-google-plus" :value="$t('sign-in.sign-in-google')"
               @clicked="auth('google')" />
@@ -166,7 +164,7 @@ export default {
       //   await this.$store.dispatch('SET_SOCIAL', response.data);
       //   await this.$router.push('/');
       // }
-      this.$auth.loginWith('google')
+      this.$auth.loginWith(provider)
     },
   },
 };
