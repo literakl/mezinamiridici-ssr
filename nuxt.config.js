@@ -75,30 +75,23 @@ export default {
   auth: {
     strategies: {
       google: {
-        token: {
-          property: 'id_token'
-        },
-        refreshToken: {
-          property: 'refresh_token'
-        },
-        prompt: 'consent',
-        access_type: 'offline',
-        scope: ['profile', 'email'],
         clientId: process.env.GOOGLE_CLIENT_ID,
-        redirectUri: process.env.GOOGLE_REDIRECT_URI,
-        responseType: "id_token token",
+        codeChallengeMethod: '',
+        responseType: 'code',
+        // cope: ['profile', 'email'],
         endpoints: {
-          token: 'http://localhost:2712/user/google/',  
-          userInfo: 'http://localhost:2712/auth/user/' 
-        },
+          token: process.env.BASE_URL + 'auth/google/', // somm backend url to resolve your auth with google and give you the token back
+          userInfo: process.env.BASE_URL + 'author/profile/' // the endpoint to get the user info after you recived the token
+        }
       },  
       facebook: {
-        clientId: process.env.FACEBOOK_CLIENT_ID,
-        redirectUri: process.env.FACEBOOK_REDIRECT_URI,
-        scope: ['public_profile', 'email'],
+        responseType: 'code',
+        clientId: '620745295617467',
         endpoints: {
-          userInfo: 'https://graph.facebook.com/v6.0/me?fields=id,name,picture{url}',
+          token: process.env.BASE_URL + 'auth/facebook/',
+          userInfo: process.env.BASE_URL + 'author/profile/'
         },
+        scope: ['public_profile', 'email']
       },
     }
   },
