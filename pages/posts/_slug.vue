@@ -48,13 +48,13 @@
                   Between Us Drivers. </a>
                 Thank you in advance.
               </div>
-
-              <pre>{{postSingle.data_id}}</pre>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <Comments :itemId="postSingle.data._id" />
+    <!-- <pre>{{comments}}</pre> -->
   </div>
 </template>
 
@@ -62,6 +62,7 @@
 
 import { mapState } from "vuex";
 import Socials from "../../components/Socials.vue";
+import Comments from "../../components/organisms/Comments.vue";
 export default {
   name: "IndexPage",
     computed: {
@@ -78,6 +79,7 @@ export default {
     };
   },
   async mounted() {
+    console.log(this.postSingle.data._id, 'single')
     this.urlPage = window.location.href,
       this.$fetch();
   },
@@ -85,7 +87,7 @@ export default {
     this.pending = true;
     await Promise.allSettled([
     await this.$store.dispatch("post/fetchPostSingle", { slug: this.defaultSlug }),
-    // await this.$store.dispatch("comments/fetchComments",{ id: '1fpib4lqns5' })
+    await this.$store.dispatch("comments/FETCH_COMMENTS",{ id: this.postSingle.data._id }),
     ])
       .finally(() => (this.pending = false))
   },
@@ -94,7 +96,7 @@ export default {
       document.getElementById("infoBox").classList.add("hidden");
     }
   },
-  components: { Socials }
+  components: { Socials, Comments }
 }
 </script>
 

@@ -40,7 +40,8 @@ export default {
   components: true,
 
   axios: {
-    baseURL: process.env.API_ENDPOINT,
+    API_ENDPOINT: process.env.API_ENDPOINT,
+    BFF_ENDPOINT: process.env.BFF_ENDPOINT
   },
 
   publicRuntimeConfig: {

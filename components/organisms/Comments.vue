@@ -6,9 +6,9 @@
       <CommentForm :isShow="true" :itemId="itemId"/>
     </div>
     <div v-else>
-      <router-link :to="{ name: 'sign-in', params: { redirectUrl: this.$route.fullPath } }">
+      <nuxt-link :to="{ name: 'sign-in', params: { redirectUrl: this.$route.fullPath } }">
         {{ $t('comment.sign-in') }}
-      </router-link>
+      </nuxt-link>
     </div>
 
     <!-- Novejsi reload button -->
@@ -45,32 +45,32 @@ export default {
     itemId: String,
   },
   computed: {
-    signedIn() {
-      return this.$store.getters.IS_AUTHORIZED;
-    },
-    incomplete() {
-      return this.$store.getters.DISCUSSION.incomplete;
-    },
-    comments() {
-      return this.$store.getters.DISCUSSION.comments.map(id => this.$store.getters.GET_COMMENT(id));
-    },
-    addedId() {
-      return this.$store.getters.DISCUSSION.addedCommentId;
-    },
+    // signedIn() {
+    //   return this.$store.getters.IS_AUTHORIZED;
+    // },
+    // incomplete() {
+    //   return this.$store.getters.DISCUSSION.incomplete;
+    // },
+    // comments() {
+    //   return this.$store.getters.DISCUSSION.comments.map(id => this.$store.getters.GET_COMMENT(id));
+    // },
+    // addedId() {
+    //   return this.$store.getters.DISCUSSION.addedCommentId;
+    // },
   },
   watch: {
-    comments() {
-      if (this.addedId !== '') {
-        setTimeout(() => {
-          this.$scrollTo(document.getElementById(this.addedId), 500, { easing: 'ease' });
-        }, 700);
-      } else {
-        this.scrollToComment();
-      }
-    },
+    // comments() {
+    //   if (this.addedId !== '') {
+    //     setTimeout(() => {
+    //       this.$scrollTo(document.getElementById(this.addedId), 500, { easing: 'ease' });
+    //     }, 700);
+    //   } else {
+    //     this.scrollToComment();
+    //   }
+    // },
   },
   created() {
-    this.$store.dispatch('FETCH_COMMENTS', { itemId: this.itemId });
+    this.$store.dispatch('FETCH_COMMENTS', { id: this.itemId });
   },
   destroyed() {
     this.$store.commit('DESTROY_COMMENTS');
