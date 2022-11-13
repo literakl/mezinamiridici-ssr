@@ -2,7 +2,7 @@
   <div>
     <p>
       Cílem stránek je prevence dopravních nehod skrze výměnu názorů a vzdělávání.
-      <router-link to="/o/mise">Naše mise</router-link>
+      <nuxt-link to="/pages/mise">Naše mise</nuxt-link>
     </p>
   </div>
 </template>

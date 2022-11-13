@@ -1,6 +1,6 @@
 <template>
   <span>
-    <router-link :to="{ name: 'user-profile', params: { id: profile.id }}" :id="id">
+    <router-link :to="{ name: 'profile', params: { id: profile.id }}" :id="id">
       {{ profile.nickname }}
     </router-link>
     <b-popover v-if="showUserInfo" @show="onShow" :target="id" triggers="hover" placement="top" delay="150">

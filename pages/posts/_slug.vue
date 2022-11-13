@@ -15,6 +15,7 @@
       </div>
     </div>
     <div v-else class="relative">
+      <!-- <pre>{{postSingle.data}}</pre> -->
       <div class="info-box" id="infoBox">
         <h4>
           The aim of the site is to prevent traffic accidents through the exchange of views and education.
@@ -28,16 +29,35 @@
           <div class="col-span-2">
             <div class="single pt-3">
               <h4 class="single__title">{{ postSingle.data.info.caption }}</h4>
-              <div class="single__informs">
-                <img class="single__ava-image" src="~/static/images/userava.svg" alt="">
-                <h5 class="single__nickname">{{ postSingle.data.info.author.nickname }}</h5>
-                <img class="single__clock-image" src="~/static/images/clock.svg" alt="">
-                <h4 class="single__date">{{ $moment(postSingle.data.info.date).format("DD.M.") }}</h4>
-                <img class="single__comment-image" src="~/static/images/comment.svg" alt="">
-                <h4 class="single__comment">{{ (postSingle.data.comments.count) }}</h4>
+              <div class="post-details">
+              <div class="post-author">
+                <BIconPersonCircle scale="1"></BIconPersonCircle>
+                <span><ProfileLink :profile="postSingle.data.info.author"/></span>
               </div>
+              <div class="post-time">
+                <BIconCalendarRange scale="1"></BIconCalendarRange>
+                <span><Date :date="postSingle.data.info.date" format="dynamicDate"/></span>
+              </div>
+              <div class="post-rating">
+                <BIconCollection scale="1"></BIconCollection>
+                <!-- <span> {{ postSingle.data?.votes?.total }}</span> -->
+              </div>
+              <div class="post-comments">
+                <BIconChatTextFill scale="1"></BIconChatTextFill>
+                <nuxt-link to="#comments">
+                  <span>{{ postSingle.data.comments.count }}</span>
+                  <span v-if="postSingle.data.comments.count > 0">&nbsp; <Date :date="postSingle.data.comments.last" format="dynamicDateTime"/></span>
+                </nuxt-link>
+              </div>
+              <div class="post-tags" v-if="hasTags">
+                <BIconTags scale="1"></BIconTags>
+                <router-link v-for="tag in tags" :key="tag" :to="{ name: 'tag', params: { tag: tag } }">
+                  #{{ tag }}
+                </router-link>
+              </div>
+            </div>
               <div class="divider w-full h-1 bg-[#AEB3B7] my-[4px]"></div>
-              <div class="static-data" v-html="postSingle.data.data.content"></div>
+              <div class="static-data mt-3" v-html="postSingle.data.data.content"></div>
             </div>
           </div>
         </div>
@@ -51,6 +71,8 @@
 <script>
 
 import { mapState } from "vuex";
+import ProfileLink from "../../components/molecules/ProfileLink.vue";
+import Date from "../../components/atoms/Date.vue";
 import Socials from "../../components/Socials.vue";
 import Comments from "../../components/organisms/Comments.vue";
 export default {
@@ -60,6 +82,12 @@ export default {
         postSingle: (state) => state.post.postSingle,
         comments: (state) => state.comments.comments
       }),
+    hasTags() {
+      return this.tags !== null && this.tags.length > 0;
+    },
+    tags() {
+      return this.poll !== null && this.postSingle.data.info.tags;
+    },
     },
   data() {
     return {
@@ -86,7 +114,7 @@ export default {
       document.getElementById("infoBox").classList.add("hidden");
     }
   },
-  components: { Socials, Comments }
+  components: { Socials, Comments, ProfileLink, Date }
 }
 </script>
 
@@ -129,6 +157,57 @@ export default {
 
 .hidden {
   display: none;
+}
+
+
+.post-details {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  font-size: 13px;
+  margin: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.post-time {
+  color: #777A7C;
+}
+
+.item-footer {
+  background-color: #fff;
+  padding: 10px 0px 5px;
+  color: #777A7C;
+  font-weight: 600;
+  margin: 0px 0;
+  width: 100%;
+}
+
+.item-footer a {
+  color: #777A7C;
+  font-weight: 400;
+}
+.item-footer a:hover {
+  color: var(--link-blue);
+}
+
+.item-footer svg {
+  margin-right: 8px;
+  font-size: 15px;
+}
+
+.post-time, .post-author, .post-rating, .post-comments {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  margin-right: 20px;
+  gap: 5px;
+}
+
+.post-tags a{
+    margin: 0 2px 0 0;
+    font-size: 13px;
+    border-radius: 3px;
 }
 
 // single 
@@ -221,6 +300,7 @@ export default {
       box-sizing: border-box;
       font-size: 14px;
       table-layout: auto;
+      margin-top: 12px;
     }
 
   div  table tr th {

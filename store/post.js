@@ -28,11 +28,9 @@ export const actions = {
         .then((res) => {
           commit("setPostList", res.data.data);
           resolve();
-          // console.log(res.data, 'postsssssssssssssss');
         })
         .catch((error) => {
           reject(error);
-          // console.log(error, 'sdasdasd');
         });
     });
   },

@@ -39,9 +39,9 @@
 
 <script>
 import { BImg, BIconPersonCircle, BIconChatTextFill } from 'bootstrap-vue';
-import Date from '@/components/atoms/Date.vue';
-import ProfileLink from '@/components/molecules/ProfileLink.vue';
-import { deepCopy } from '@/utils/api';
+import Date from '../../components/atoms/Date.vue';
+import ProfileLink from '../../components/molecules/ProfileLink.vue';
+// import { deepCopy } from '@/utils/api';
 
 export default {
   name: 'ItemBox',

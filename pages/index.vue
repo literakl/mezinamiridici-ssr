@@ -15,9 +15,6 @@
       </div>
     </div>
     <div v-else>
-      <!-- <pre>
-      {{ commentLast }}
-    </pre> -->
       <div class="pt-3 m-auto pb-3">
         <h1 class="title__gray">
           Turning at an intersection without turn signals
@@ -98,7 +95,7 @@
         <div class="row postcards">
           <div v-for="(item, index) in postList" :key="index" class="col-lg-3 col-md-6 col-sm-12 ">
             <PostCard :slug="item.info.slug" :typeInfo="item.type" :title="item.info.caption"
-              :author="item.info.author.nickname" :image="item.info.picture" :commentsCount="item.comments.count"
+              :author="item.info.author" :image="item.info.picture" :commentsCount="item.comments.count"
               :day="item.info.date" />
           </div>
         </div>

@@ -8,6 +8,8 @@ export const state = () => ({
   userNickname: null,
   userRoles: [],
   userEmail: null,
+
+  userProfile: null,
 })
 
 export const getters = {
@@ -19,9 +21,11 @@ export const getters = {
   USER_NICKNAME: state => state.userNickname,
   USER_ROLES: state => state.userRoles,
   HAS_ROLES: (state, getters) => (getters.USER_ROLES.length > 0),
+  USER_EMAIL: state => state.userEmail,
+
+
   // https://stackoverflow.com/q/46210109/1639556
   // HAS_ROLE: (state) => (role) => false;
-  USER_EMAIL: state => state.userEmail,
 }
 
 export const mutations = {
@@ -43,6 +47,9 @@ export const mutations = {
   SET_USER_EMAIL: (state, payload) => {
     state.userEmail = payload
   },
+  SET_USER_PROFILE: (state, userProfile) => {
+    state.userProfile = userProfile
+  }
 }
 
 export const actions = {
@@ -181,7 +188,24 @@ export const actions = {
     return patch('API', `/users/${userId}`, payload, context, jwt)
   },
   VERIFY_USER: (context, payload) => this.$api.post(`/verify/${payload.token}`),
-  GET_USER_PROFILE_BY_ID: async (context, payload) => this.$api.get(`/users/${payload.id}`, context),
+
+  // GET_USER_PROFILE_BY_ID: async (context, payload) => this.$api.get(`/users/${payload.id}`, context),
+  
+  async FETCH_USER_PROFILE ({commit}, {id}) {
+    return await new Promise((resolve, reject) => {
+      this.$axios
+        .get(this.$config.API_ENDPOINT+`/users/${id}`)
+        .then((res) => {
+          console.log(res, 'profile-info')
+          commit('SET_USER_PROFILE', res.data.data);
+          resolve(res);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  },
+
   VERIFY_MAIL: async (context, payload) => {
     const body = {
       email: payload.email,

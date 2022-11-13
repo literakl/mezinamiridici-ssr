@@ -9,7 +9,7 @@
       {{title}}
     </h4>
     <div class="postcard__divider"></div>
-    <div class="postcard__description">
+    <!-- <div class="postcard__description">
       <div>
         <div v-if="true" class="d-flex align-items-center ">
           <img class="postcard__ava" src="~/static/images/userava.svg" alt="">
@@ -21,15 +21,31 @@
         <img class="postcard__ava" src="~/static/images/comment.svg" alt="">
         <h5 class="postcard__comment">{{commentsCount}}</h5>
       </div>
-    </div>
+    </div> -->
+     <div class="bottom-links">
+        <template><span><BIconPersonCircle></BIconPersonCircle> <ProfileLink :profile="author"/></span></template>
+        <template v-if="typeInfo === 'poll'">{{ $t('poll.votes') }}: {{ item.votes_count }}</template>
+        <template v-if="commentsCount > 0">
+          <span>
+            <nuxt-link :to="commentLink">
+              <BIconChatTextFill></BIconChatTextFill>
+              {{ commentsCount }}
+            </nuxt-link>
+          </span>
+        </template>
+      </div>
   </nuxt-link>
 </template>
 
 <script>
+import ProfileLink from "../components/molecules/ProfileLink.vue"
 export default {
   data(){
     return {
     }
+  },
+  components: {
+    ProfileLink
   },
   props: {
     slug: {default: String},
@@ -39,6 +55,7 @@ export default {
     image: {default: String},
     commentsCount: {default: String},
     day: {default: String},
+    commentLink: {default: String},
   }
 }
 </script>
@@ -123,5 +140,16 @@ export default {
     font-size: 12px;
     margin-left: 3px !important;
   }
+}
+
+.bottom-links {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  font-weight: 400;
+  font-size: 14px;
+  border-top: 1px solid #ddd;
+  align-items: center;
+  padding: 10px 10px 0;
 }
 </style>
