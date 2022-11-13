@@ -77,13 +77,14 @@ export default {
     strategies: {
       google: {
         clientId: process.env.GOOGLE_CLIENT_ID,
+        redirect_uri: process.env.GOOGLE_REDIRECT_URI, // the url to redirect to after the user has been authenticated by google
         codeChallengeMethod: '',
         responseType: 'code',
         // cope: ['profile', 'email'],
         endpoints: {
           token: process.env.BASE_URL + 'auth/google/', // somm backend url to resolve your auth with google and give you the token back
           userInfo: process.env.BASE_URL + 'author/profile/' // the endpoint to get the user info after you recived the token
-        }
+        },
       },  
       facebook: {
         responseType: 'code',

@@ -38,22 +38,12 @@
               </div>
               <div class="divider w-full h-1 bg-[#AEB3B7] my-[4px]"></div>
               <div class="static-data" v-html="postSingle.data.data.content"></div>
-
-              <div class="notification notification-primary">
-                You must have been interested in the article when you finished reading it. Will you help us? We need
-                more readers. Recommend the server <a href="https://www.mezinamiridici.cz/"> Between Us Drivers </a> to
-                friends,
-                share <a href="">this article, </a> add <a href=""> our RSS </a> to the
-                reader. If you have a website, insert a link to our server <a href="https://www.mezinamiridici.cz/">
-                  Between Us Drivers. </a>
-                Thank you in advance.
-              </div>
             </div>
           </div>
         </div>
+    <Comments :itemId="postSingle.data._id" />
       </div>
     </div>
-    <Comments :itemId="postSingle.data._id" />
     <!-- <pre>{{comments}}</pre> -->
   </div>
 </template>
@@ -79,7 +69,7 @@ export default {
     };
   },
   async mounted() {
-    console.log(this.postSingle.data._id, 'single')
+    // console.log(this.postSingle.data._id, 'single')
     this.urlPage = window.location.href,
       this.$fetch();
   },
@@ -87,7 +77,7 @@ export default {
     this.pending = true;
     await Promise.allSettled([
     await this.$store.dispatch("post/fetchPostSingle", { slug: this.defaultSlug }),
-    await this.$store.dispatch("comments/FETCH_COMMENTS",{ id: this.postSingle.data._id }),
+    // await this.$store.dispatch("comments/FETCH_COMMENTS",{ id: this.postSingle.data._id }),
     ])
       .finally(() => (this.pending = false))
   },
@@ -223,6 +213,25 @@ export default {
   }
 
   .static-data {
+   div table {
+      border: 1px solid #DBDBE2;
+      border-radius: 3px;
+      position: relative;
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 14px;
+      table-layout: auto;
+    }
+
+  div  table tr th {
+      vertical-align: middle;
+    }
+
+  div table tr td {
+      border: 1px solid #DBDBE2;
+      vertical-align: middle;
+    }
+
     >p {
       font-size: 14px;
       text-indent: 10px;
@@ -258,10 +267,6 @@ export default {
       margin: 8px 0 !important;
     }
 
-    >div table {
-      margin: 15px 0 !important;
-      max-width: 90%;
-    }
 
   }
 

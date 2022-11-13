@@ -24,10 +24,10 @@ export default {
     comment: Object,
   },
   computed: {
-    replies() {
-      return this.$store.getters.GET_REPLIES(this.comment._id)
-        .map(id => this.$store.getters.GET_COMMENT(id));
-    },
+    // replies() {
+    //   return this.$store.getters.GET_REPLIES(this.comment._id)
+    //     .map(id => this.$store.getters.GET_COMMENT(id));
+    // },
   },
   methods: {
     getComment(commentId) {
@@ -40,7 +40,7 @@ export default {
       const payload = {
         itemId: this.itemId,
         commentId: this.comment._id,
-        // lastSeen: this.replies[this.replies.length - 1]._id,
+        lastSeen: this.replies[this.replies.length - 1]._id,
       };
       await this.$store.dispatch('FETCH_REPLIES', payload);
     },

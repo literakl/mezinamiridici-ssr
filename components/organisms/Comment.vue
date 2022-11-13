@@ -141,9 +141,9 @@ export default {
       });
     },
     async upvote() {
-      if (!this.$store.getters.IS_AUTHORIZED) {
+      if (!this.$auth.loggedIn) {
         await this.$router.push({
-          name: 'sign-in',
+          path: this.localePath('prihlaseni'),
           params: { redirectUrl: this.$route.fullPath },
         });
         return;
@@ -157,9 +157,9 @@ export default {
       this.voted = true;
     },
     async downvote() {
-      if (!this.$store.getters.IS_AUTHORIZED) {
+      if (!this.$auth.loggedIn) {
         await this.$router.push({
-          name: 'sign-in',
+          path: this.localePath('prihlaseni'),
           params: { redirectUrl: this.$route.fullPath },
         });
         return;
@@ -173,10 +173,10 @@ export default {
       this.voted = true;
     },
     reply() {
-      if (!this.$store.getters.IS_AUTHORIZED) {
+      if (!this.$auth.loggedIn) {
         this.$router.push({
-          name: 'sign-in',
-          params: { redirectUrl: this.$route.fullPath },
+          path: this.localePath('prihlaseni'),
+          // params: { redirectUrl: this.$route.fullPath },
         });
         return;
       }

@@ -31,7 +31,7 @@ import Comment from '@/components/organisms/Comment.vue';
 import Replies from '@/components/organisms/Replies.vue';
 import Button from '@/components/atoms/Button.vue';
 import CommentForm from '@/components/molecules/CommentForm.vue';
-
+import { mapState } from 'vuex';
 export default {
   name: 'Comments',
   components: {
@@ -45,6 +45,9 @@ export default {
     itemId: String,
   },
   computed: {
+    ...mapState({
+        comments: (state) => state.comments.comments
+    })
     // signedIn() {
     //   return this.$store.getters.IS_AUTHORIZED;
     // },
@@ -59,18 +62,18 @@ export default {
     // },
   },
   watch: {
-    // comments() {
-    //   if (this.addedId !== '') {
-    //     setTimeout(() => {
-    //       this.$scrollTo(document.getElementById(this.addedId), 500, { easing: 'ease' });
-    //     }, 700);
-    //   } else {
-    //     this.scrollToComment();
-    //   }
-    // },
+    comments() {
+      if (this.addedId !== '') {
+        setTimeout(() => {
+          this.$scrollTo(document.getElementById(this.addedId), 500, { easing: 'ease' });
+        }, 700);
+      } else {
+        this.scrollToComment();
+      }
+    },
   },
   created() {
-    this.$store.dispatch('FETCH_COMMENTS', { id: this.itemId });
+    this.$store.dispatch('comments/FETCH_COMMENTS', { id: this.itemId });
   },
   destroyed() {
     this.$store.commit('DESTROY_COMMENTS');

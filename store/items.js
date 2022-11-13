@@ -115,7 +115,7 @@ export const actions = {
   async FETCH_CONTENT ({commit}, {slug}) {
     return await new Promise((resolve, reject) => {
       this.$axios
-        .get(`/content/${slug}`)
+        .get(this.$config.API_ENDPOINT+`/content/${slug}`)
         .then((res) => {
           console.log(res, '11')
           commit('SET_CONTENT', res.data.data);

@@ -58,7 +58,6 @@ export const actions = {
       .get(this.$config.API_ENDPOINT + '/accidents/last')
         .then((res) => {
           commit("setAccident", res.data);
-          console.log(res.data, 'accidents')
           resolve(res);
         })
         .catch((error) => {
@@ -74,7 +73,6 @@ export const actions = {
       .get(this.$config.BFF_ENDPOINT + '/polls/last')
         .then((res) => {
           commit("setCommentLast", res.data);
-          console.log(res.data, 'accidents')
           resolve(res);
         })
         .catch((error) => {

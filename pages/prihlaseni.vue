@@ -113,7 +113,7 @@ export default {
     },
   },
   mounted() {
-    console.log('18')
+    console.log(this.$auth, 'auth')
   },
   methods: {
     redirectToSignUp() {
@@ -164,7 +164,12 @@ export default {
       //   await this.$store.dispatch('SET_SOCIAL', response.data);
       //   await this.$router.push('/');
       // }
-      this.$auth.loginWith(provider)
+      try {
+      await this.$auth.loginWith(provider)
+      }
+      catch(error) {
+        console.log(error,'error')
+      }
     },
   },
 };
