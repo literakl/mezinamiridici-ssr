@@ -99,7 +99,7 @@ export default {
   },
 
   server: {
-    port: 2712
+    port: 3000
   },
 
   i18n: {

@@ -61,11 +61,11 @@
         </b-navbar-nav>
       </b-navbar>
       <infoBox></infoBox>
-      <b-button v-if="updateExists"
+      <!-- <b-button v-if="updateExists"
                 class="w-100 fixed-top bg-warning text-dark rounded-0 border-warning"
                 @click="refreshApp">
         {{ $t('app.update') }}
-      </b-button>
+      </b-button> -->
     </header>
     <main class="main-w-h">
       <Nuxt />
